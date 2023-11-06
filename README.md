@@ -1,1 +1,1 @@
-# Hastane-Kay-t-Sistemi
+# Hastane Kayıt Sistemi
