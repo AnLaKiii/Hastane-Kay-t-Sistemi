@@ -10,7 +10,7 @@
 </head>
 <body id="userMainPage"> 
     <nav class="">
-        <ul class="nav-list container-xl">
+        <ul class="nav-list container-xxl">
             <li class="logo">
                 <img src="img/logo.png" alt="">
             </li>
@@ -58,6 +58,59 @@
             </li>
         </ul>
     </nav>
+    <section class="row pt-3 px-0 px-2" style="z-index: 0;">
+        <div class="col-xxl-2 mb-2">
+            <div class="row">
+                <a href="" class="text-white col-12 col-sm-6 col-xxl-12 mb-2">
+                    <div class="card card-color rounded-0 ">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center">
+                                <i class="fa-solid fa-stethoscope"></i>
+                                <h5 class="card-title mb-0 ms-2">Hastane Randevu Al</h5>
+                            </div>
+                        </div>
+                    </div>  
+                </a>
+                <a href="" class="text-white col-12 col-sm-6 col-xxl-12 mb-2">
+                    <div class="card card-color rounded-0">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center">
+                                <i class="fa-solid fa-calendar"></i>
+                                <h5 class="card-title mb-0 ms-2">Randevularım</h5>
+                            </div>
+                        </div>
+                    </div>  
+                </a>
+            </div>
+        </div>
+        <div class="col-8"></div>
+        <div class="col-xxl-2">
+
+            <div class="card person-info rounded-bottom">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <h5 class="card-title mb-0 fw-bold">Abdülbaki Demir</h5>
+                    </div>
+                    <hr>
+                    <ul class="p-0">
+                        <li>
+                            <i class="fa-solid fa-id-card"></i>
+                            <small>75248652485</small>
+                        </li>
+                        <li>
+                            <i class="fa-solid fa-calendar"></i>
+                            <small>16.06.2002</small>
+                        </li>
+                        <li>
+                            <i class="fa-solid fa-location-dot"></i>
+                            <small>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam, veniam!</small>
+                        </li>
+                    </ul>
+                </div>
+            </div>  
+        </div>
+
+    </section>
 </body>
 </html>
 

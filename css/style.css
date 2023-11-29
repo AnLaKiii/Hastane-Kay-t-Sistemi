@@ -39,11 +39,16 @@
 /*********************/
 /*** USER MAIN PAGE **/
 #userMainPage{
-    overflow: hidden;
-    width: 100vw;
+    overflow-x: hidden;
+    width: 100%;
+    padding-top: 4.5rem;
 }
 
 nav{
+   position: absolute;
+   top: 0;
+   z-index: 100;
+   width: 100%;
    background-color: #167585; 
    color: #fff;
    display: flex;
@@ -54,6 +59,7 @@ nav{
 nav .logo{
     height: 3rem;
     padding: 0.5rem;
+    cursor: pointer;
 }
 nav .logo > img{
     height: 100%;
@@ -100,6 +106,7 @@ nav .logo > img{
 .active {
     display: block!important;
     box-shadow: 0px 0px 10px 5px #3b3b3b5e;
+    z-index: 1000;
 }
 .drop-ul hr{
     display: none;
@@ -232,3 +239,24 @@ nav .logo > img{
         background-color: transparent;
     }
   }
+
+  /******************************/
+  /******** MAIN SECTION ********/ 
+.card-color{
+    background-color: #167585;
+}
+.card-color:hover{
+    background-color: #1fa7be;
+}
+
+.person-info ul li{
+    display: flex;
+    flex-direction: row;
+    align-items: start;
+    padding: 0;
+    margin-bottom: 0.5rem;
+}
+.person-info ul li small{
+    margin: 0 1rem;
+    font-weight: 600;
+}
