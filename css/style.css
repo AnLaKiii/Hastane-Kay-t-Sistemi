@@ -1,4 +1,4 @@
-*{margin: 0;padding: 0;}
+*{margin: 0;padding: 0; list-style: none;text-decoration: none!important;}
 /*********************/
 /******* LOGIN *******/
 #login-main-page-background{
@@ -36,3 +36,199 @@
     
 }
 
+/*********************/
+/*** USER MAIN PAGE **/
+#userMainPage{
+    overflow: hidden;
+    width: 100vw;
+}
+
+nav{
+   background-color: #167585; 
+   color: #fff;
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   box-shadow: 0 0 15px 5px #4747475e;
+}
+nav .logo{
+    height: 3rem;
+    padding: 0.5rem;
+}
+nav .logo > img{
+    height: 100%;
+}
+.nav-list{
+    display: flex;
+    justify-content: space-between;
+    padding: 0.8rem;
+    margin-bottom: 0;
+}
+.my-nav-item{
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin: 0 1rem;
+    cursor: pointer;
+}
+.my-nav-item  p{
+    margin:0 0 0 0.6rem;
+    font-weight: 600;
+}
+.user-image-1{
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    padding: 0.2rem;
+    overflow: hidden;
+}
+.user-image-1 > img{
+    width: 100%;
+    filter: invert();
+} 
+.drop-ul{
+    position: absolute;
+    background: #167585;
+    display: none;
+    width: 20rem;
+    right: -1rem;
+    top: 3.5rem;
+    padding: 0.5rem 0;
+}
+.active {
+    display: block!important;
+    box-shadow: 0px 0px 10px 5px #3b3b3b5e;
+}
+.drop-ul hr{
+    display: none;
+}
+.drop-ul li{
+    margin: 0.3rem 0;
+    padding: 0.3rem 1rem;
+    width: 20rem;
+}
+.drop-ul li a{
+    display: flex;
+    align-items: center;
+    color: #fff;
+}
+.drop-ul li i{
+    font-size: 1.2rem;
+}
+.drop-ul li:first-child{
+    display: none;
+}
+.drop-ul li:hover{
+    background: #1fa7be;
+}
+@media only screen and (max-width: 600px) {
+    .my-nav-item > p{
+        display: none;
+    }
+    .my-nav-item{
+        position: static ;
+    }
+    .drop-ul{
+        display: block;
+        position: absolute;
+        background: #167585;
+        overflow: hidden;
+        top: 0px;
+        right: 0px;
+        width: 0px;
+        margin: 0;
+        padding: 2rem 0 ;
+        height: 100vh;
+        transition: width 0.4s ease-in;
+    }
+    .drop-ul hr{
+        display: block;
+    }
+    .drop-ul li{
+        margin: 0.3rem 0;
+        padding: 0.7rem 1rem;
+    }
+    .drop-ul li:first-child{
+        display: flex;
+    }
+    .active {
+        width: 15rem;
+    }
+  }
+
+/***********************/
+/*********SEARCH1*******/
+/***********************/
+
+#search-box1{
+    display: flex;
+    width: 17rem;
+    height: 2.6rem ;
+}
+#input-box1{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+#input1{
+    outline: none;
+    width: 4rem;
+    padding: 0 15px;
+    background-color: rgb(116, 223, 250);
+    border: 1px solid #d3d3d3;
+    border-right: none;
+    border-radius: 20px 0px 0px 20px;
+    cursor: text;
+    transition: all 0.2s ease-in;
+    color: #fff;
+}
+#input1::placeholder{
+    color: #fff;
+    transition: all 0.2s;
+}
+#input1:focus::placeholder{
+    color: #888;
+}
+#input1:focus{
+    width: 16rem;
+    background-color: transparent;
+}
+#input1:focus + #write1{
+    display: block;
+}
+#search-button1{
+    width: 4rem;
+    background-color: rgb(234, 59, 59);
+    height: 100%;
+    border: 1px solid #d3d3d3;
+    border-radius: 0px 20px 20px 0px;
+    cursor: pointer;
+}
+#search-button1 i{
+    color: #fff;
+}
+#write1{ 
+    position: absolute; 
+    display: none;
+    width: 50vw;
+    background-color: #fff;
+    border: 1px solid #d3d3d3;
+    border-radius: 10px;
+    top: 4.9rem;
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+
+
+@media only screen and (max-width: 600px) {
+    #search-box1{
+        width: 10rem;
+    }
+    #input1:focus{
+        width: 6rem;
+        background-color: transparent;
+    }
+  }
