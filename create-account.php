@@ -57,7 +57,7 @@
 var inputNumber = document.querySelectorAll(".inputNumber");
 for (var i = 0; i < inputNumber.length ; i++){
     inputNumber[i].addEventListener("keydown", function(event){
-        if(!isNaN(event.key) || event.key == "Backspace"){
+        if(!isNaN(event.key) || event.key == "Backspace" || event.key == "Tab"){
         }
         else{
             event.preventDefault();

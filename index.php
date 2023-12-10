@@ -9,64 +9,16 @@
     <link rel="stylesheet" href="fontawesome/css/all.css">
 </head>
 <body id="userMainPage"> 
-    <nav class="">
-        <ul class="nav-list container-xxl">
-            <li class="logo">
-                <img src="img/logo.png" alt="">
-            </li>
-            <li class="">
-                <div id="search-box1">
-                    <div id="input-box1">
-                        <input id="input1" type="text" placeholder="Search" on="deneme()" onkeyup="showHint(this.value)">
-                        <div id="write1"></div>
-                        <button id="search-button1"><i class="fa-solid fa-magnifying-glass"></i></button>
-                    </div>
-                </div>
-            </li>
-            <li class="my-nav-item toggle-drop">
-                <div class="user-image-1">
-                    <img src="img/user.png" alt="">
-                </div>
-                <p>Abdülbaki Demir</p>
-                <ul class="drop-ul">
-                    <li>
-                        <div class="user-image-1">
-                            <img src="img/user.png" alt="">
-                        </div>
-                        <p>Abdülbaki Demir</p>
-                    </li>
-                    <hr>
-                    <li>
-                        <a href="">
-                            <i class="fa-solid fa-gear"></i>
-                            <p>Hesap</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="">
-                            <i class="fa-solid fa-calendar"></i>
-                            <p>Randevularım</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="">
-                            <i class="fa-solid fa-right-to-bracket"></i>
-                            <p>Çıkış</p>
-                        </a>
-                    </li>
-                </ul>
-            </li>
-        </ul>
-    </nav>
-    <section class="row pt-3 px-0 px-2" style="z-index: 0;">
+    <?php include "php/navbar.php";?>
+    <section class="pt-3 px-2 flex-xxl-row flex-column d-flex w-100" style="z-index: 0;" >
         <div class="col-xxl-2 mb-2">
-            <div class="row">
-                <a href="" class="text-white col-12 col-sm-6 col-xxl-12 mb-2">
+            <div class="row ms-0 w-100">
+                <a href="rendevual.php" class="text-white col-12 col-sm-6 col-xxl-12 mb-2">
                     <div class="card card-color rounded-0 ">
                         <div class="card-body">
                             <div class="d-flex align-items-center">
                                 <i class="fa-solid fa-stethoscope"></i>
-                                <h5 class="card-title mb-0 ms-2">Hastane Randevu Al</h5>
+                                <h5 class="card-title mb-0 ms-2">Randevu Al</h5>
                             </div>
                         </div>
                     </div>  
@@ -83,7 +35,111 @@
                 </a>
             </div>
         </div>
-        <div class="col-8"></div>
+        <div class="col-xxl-8 flex-wrap">
+            <div class="mx-2 col  col-md-6 col-lg-3">
+                <select class="form-control mb-3" id="filtre" name="filtre">
+                    <option selected value="1">hepsi</option>
+                    <option value="2">Aktif</option>
+                    <option value="3">Tamamlanan</option>
+                    <option value="4">Tamamlanamayan</option>
+                </select>
+            </div>
+            <div class="d-flex flex-wrap w-100">
+                <div class="col-lg-3 col-md-4 col-sm-6 col-12 p-2 pt-0 pb-3 rese-info">
+                    <div class="rounded-0 card">
+                        <canvas class="qrcode p-4"></canvas>
+                        <div class="card-body">
+                            <h5 class="card-title fw-bold">Şehir Hastanesi <small class="text-warning">(aktif)</small></h5>
+                            <hr>
+                            <ul class="p-0">
+                                <li>
+                                    <i class="fa-solid fa-clipboard"></i>
+                                    <small>Kardiyoloji</small>
+                                </li>
+                                <li>
+                                    <i class="fa-solid fa-user-doctor"></i>
+                                    <small>Mehmet Gözütok</small>
+                                </li>
+                                <li>
+                                    <i class="fa-solid fa-calendar"></i>
+                                    <small>25.12.2023</small>
+                                </li>
+                                <li>
+                                    <i class="fa-solid fa-clock"></i>
+                                    <small>11:30</small>
+                                </li>
+                                <li>
+                                    <i class="fa-solid fa-location-dot"></i>
+                                    <small>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam, veniam!</small>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6 col-12 p-2 pt-0 pb-3 rese-info">
+                    <div class="rounded-0 card">
+                        <canvas class="qrcode p-4"></canvas>
+                        <div class="card-body">
+                            <h5 class="card-title fw-bold">Şehir Hastanesi <small class="text-danger">(iptal)</small></h5>
+                            <hr>
+                            <ul class="p-0">
+                                <li>
+                                    <i class="fa-solid fa-clipboard"></i>
+                                    <small>Kardiyoloji</small>
+                                </li>
+                                <li>
+                                    <i class="fa-solid fa-user-doctor"></i>
+                                    <small>Mehmet Gözütok</small>
+                                </li>
+                                <li>
+                                    <i class="fa-solid fa-calendar"></i>
+                                    <small>25.08.2023</small>
+                                </li>
+                                <li>
+                                    <i class="fa-solid fa-clock"></i>
+                                    <small>11:30</small>
+                                </li>
+                                <li>
+                                    <i class="fa-solid fa-location-dot"></i>
+                                    <small>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam, veniam!</small>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6 col-12 p-2 pt-0 pb-3 rese-info">
+                    <div class="rounded-0 card">
+                        <canvas class="qrcode p-4"></canvas>
+                        <div class="card-body">
+                            <h5 class="card-title fw-bold">Şehir Hastanesi <small class="text-success">(tamamlandı)</small></h5>
+                            <hr>
+                            <ul class="p-0">
+                                <li>
+                                    <i class="fa-solid fa-clipboard"></i>
+                                    <small>Kardiyoloji</small>
+                                </li>
+                                <li>
+                                    <i class="fa-solid fa-user-doctor"></i>
+                                    <small>Mehmet Gözütok</small>
+                                </li>
+                                <li>
+                                    <i class="fa-solid fa-calendar"></i>
+                                    <small>25.07.2023</small>
+                                </li>
+                                <li>
+                                    <i class="fa-solid fa-clock"></i>
+                                    <small>11:30</small>
+                                </li>
+                                <li>
+                                    <i class="fa-solid fa-location-dot"></i>
+                                    <small>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam, veniam!</small>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="col-xxl-2">
 
             <div class="card person-info rounded-bottom">
@@ -94,7 +150,7 @@
                     <hr>
                     <ul class="p-0">
                         <li>
-                            <i class="fa-solid fa-id-card"></i>
+                            <i class="fa-solid fa-id-badge"></i>
                             <small>75248652485</small>
                         </li>
                         <li>
@@ -111,12 +167,14 @@
         </div>
 
     </section>
+    <?php include "php/footer.php";?> 
+  </div>
 </body>
 </html>
 
 
 <script src="js/bootstrap.bundle.min.js"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/qrious@4.0.2/dist/qrious.min.js"></script>
 <script>
     var togleDrop = document.querySelector(".toggle-drop");
     togleDrop.addEventListener("click",function(event){
@@ -164,4 +222,12 @@ function showHint(str){
         write.innerHTML = "";
     }
 }
+
+
+var qrCodes = document.querySelectorAll(".qrcode");
+for(var i = 0; i < qrCodes.length; i ++){
+    const qr = new QRious({ element: qrCodes[i], value: "https://abdulbakidemir.com", size: 800 , backgroundAlpha: 0});
+}
+
+
 </script>
