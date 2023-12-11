@@ -1,0 +1,1 @@
+SELECT DoktorAdi, DoktorSoyadi, DoktorBolumID FROM Doktor;
