@@ -1,3 +1,0 @@
-DECLARE @a BIGINT;
-
-DELETE FROM Doktor	WHERE DTCKimlikNo = @a;

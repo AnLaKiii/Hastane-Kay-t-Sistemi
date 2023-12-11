@@ -26,7 +26,7 @@
         <div class="row">
             <form action="" id="randevuAl" class="col-11 col-lg-8 col-xxl-6 mx-auto">
                 <label for="bolum">Bölüm</label>
-                <select class="form-control mb-3" id="bolum" name="bolum">
+                <select class="form-select shadow-none mb-3" id="bolum" name="bolum">
                     <option selected>Seçilmedi</option>
                     <option value="bolum1">Bolum 1</option>
                     <option value="bolum2">Bolum 2</option>
@@ -34,7 +34,7 @@
                     <option value="bolum4">Bolum 4</option>
                 </select>
                 <label for="doktor">Doktor</label>
-                <select class="form-control mb-3" id="doktor" name="doktor">
+                <select class="form-select shadow-none mb-3" id="doktor" name="doktor">
                     <option selected>Seçilmedi</option>
                     <option value="doktor1">Doktor 1</option>
                     <option value="doktor2">Doktor 2</option>
@@ -44,7 +44,7 @@
                 <label for="tarihSec">Tarih Seçiniz:</label>
                 <input type="date" class="form-control mb-3" id="tarihSec">
                 <label for="saat">Saat</label>
-                <select class="form-control mb-3" id="saat" name="saat">
+                <select class="form-select shadow-none mb-3" id="saat" name="saat">
                     <option selected>Seçilmedi</option>
                     <option value="09:00">09:00</option>
                     <option value="09:10" disabled>09:10</option>

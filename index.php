@@ -37,7 +37,7 @@
         </div>
         <div class="col-xxl-8 flex-wrap">
             <div class="mx-2 col  col-md-6 col-lg-3">
-                <select class="form-control mb-3" id="filtre" name="filtre">
+                <select class="form-select shadow-none mb-3" id="filtre" name="filtre">
                     <option selected value="1">hepsi</option>
                     <option value="2">Aktif</option>
                     <option value="3">Tamamlanan</option>

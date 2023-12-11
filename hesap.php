@@ -35,9 +35,9 @@
                         </tr>
                     </tbody>
                 </table>
-                <div class="d-flex justify-content-between align-items-center" style="cursor:pointer">
+                <div class="d-flex justify-content-between align-items-center">
                     <h5 class="fw-bold">İletişim Bilgileri</h5>
-                    <small id="duzenle">Düzenle</small>
+                    <small id="duzenle"  style="cursor:pointer">Düzenle</small>
                 </div>
                 <hr>
                 <table class="mb-4">
@@ -59,6 +59,10 @@
                 <h5 class="fw-bold">Şifre</h5>
                 <hr>
                 <form action="" id="sifreGuncelle">
+                    <label for="" class="w-100">
+                        Mevcut Şifre
+                        <input type="password" id="pass0" class="w-100">
+                    </label>
                     <label for="" class="w-100">
                         Yeni Şifre
                         <input type="password" id="pass1" class="w-100">
@@ -99,7 +103,7 @@
             <form action="" id="cominSetForm" class="w-100 px-0 mx-0">
                 <label for="" class="w-100">
                     Telefon
-                    <input type="tel" class="w-100 inputNumber">
+                    <input type="tel" class="w-100 inputNumber" maxlength="10" placeholder="(555) 555 55 55">
                 </label>
                 <label for="" class="w-100">
                     E-posta
@@ -118,6 +122,15 @@
 
 <script src="js/bootstrap.bundle.min.js"></script>
 <script>
+    var cominSet = document.getElementById("cominSet");
+    var closeComin = document.getElementById("closeComin");
+    var duzenle = document.getElementById("duzenle");
+    duzenle.addEventListener("click",function(e){
+        cominSet.classList.add("active1");
+    });
+    closeComin.addEventListener("click",function(e){
+        cominSet.classList.remove("active1");
+    });
     var togleDrop = document.querySelector(".toggle-drop");
     togleDrop.addEventListener("click",function(event){
         var dropDown = document.querySelector(".toggle-drop .drop-ul");
@@ -158,11 +171,12 @@
 
 
     var showCheckBox = document.getElementById("showPass");
+    var password0 = document.getElementById("pass0");
     var password = document.getElementById("pass1");
     var passwordCheck = document.getElementById("pass2");
     showCheckBox.addEventListener("click",function(){
-        if(showCheckBox.checked){password.type = "text"; passwordCheck.type = "text";}
-        else{password.type = "password"; passwordCheck.type = "password";}
+        if(showCheckBox.checked){password0.type = "text";;password.type = "text"; passwordCheck.type = "text";}
+        else{password0.type = "password";password.type = "password"; passwordCheck.type = "password";}
     });
 
     var sifreGuncelle = document.getElementById("sifreGuncelle");

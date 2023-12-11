@@ -292,7 +292,7 @@ footer{
 
 
 #cominSet{
-    display: flex;
+    display: none;
     justify-content: center;
     align-items: center;
     position: fixed;
@@ -309,8 +309,8 @@ footer{
     background-color: #fff;
     border-radius: 1rem;
 } 
-#cominSet.active{
-    display: none;
+#cominSet.active1{
+    display: flex;
 }
 
 /***************************/
