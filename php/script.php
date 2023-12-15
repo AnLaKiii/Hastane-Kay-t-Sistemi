@@ -57,6 +57,19 @@ if($getVal == "giris"){
     }
 }
 if($getVal == "randevu"){
+    if($_GET["doc"] == "1"){
+        session_start();
+        if(isset($_SESSION['hasta'])){
+            echo "
+                <option value='bolum1'>Bölüm 1</option>
+                <option value='bolum2'>Bölüm 2</option>
+                <option value='bolum3'>Bölüm 3</option>
+                <option value='bolum4'>Bölüm 4</option>
+                <option value='bolum5'>Bölüm 5</option>"
+                ;
+        }
+        
+    }
     /*
     include "connect.php";
     $sorgu = "SELECT * FROM Sifre WHERE TCKimlikNo = $a";

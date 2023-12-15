@@ -37,10 +37,6 @@ if(!isset($_SESSION['hasta'])){
                         <p>Randevu almak istediğn bölümü seç.</p>
                         <select class="inputs form-select shadow-none mb-3" id="bolum" name="bolum">
                             <option value="0">Seçilmedi</option>
-                            <option value="bolum1">Bolum 1</option>
-                            <option value="bolum2">Bolum 2</option>
-                            <option value="bolum3">Bolum 3</option>
-                            <option value="bolum4">Bolum 4</option>
                         </select>
                         <div class="w-100  d-flex justify-content-end">
                             <button  class="btn btn-primary btnI disabled">İleri</button>
@@ -157,7 +153,18 @@ if(!isset($_SESSION['hasta'])){
     var bolumBtnI = document.querySelectorAll(".btnI");
     var bolumBtnG = document.querySelectorAll(".btnG");
     inputs.forEach(function(input,i){
-        input.setAttribute("sec",i)
+        input.setAttribute("sec",i);
+        if(i == 0){
+            var formData = new FormData(randevual);
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    input.innerHTML = input.innerHTML + xhr.response;
+                }
+            };
+            xhr.open("POST", "php/script.php?val=randevu&doc=1", true);
+            xhr.send(formData);
+        }
         input.addEventListener("change",function(e){
             var id = e.target.getAttribute("sec");
             if(e.target.value != 0){
