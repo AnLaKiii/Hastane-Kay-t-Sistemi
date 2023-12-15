@@ -1,0 +1,35 @@
+DOKTOR RANDEVU SEÇME
+SELECT DoktorID, CONCAT(DoktorAdi, ' ', DoktorSoyadi) AS DoktorIsım FROM Doktor
+INNER JOIN
+BolumAdi ON Doktor.DoktorBolumID = BolumAdi.BolumID;
+
+
+BÖLÜM SEÇME
+SELECT * FROM BolumAdi;
+
+RANDEVU TARİHİ SEÇME
+SELECT COUNT(RandevuSaati) AS Adet, RandevuTarihi  FROM Randevu WHERE DoktorID = 1 
+GROUP BY RandevuTarihi ;
+
+RANDEVU SAATİ SEÇME
+DECLARE @a DATE;
+SELECT RandevuSaati FROM Randevu WHERE RandevuTarihi =@a;
+
+randevu tablosuna ekleme
+DECLARE @d INT;
+DECLARE @e INT;
+Declare @b DATE;
+DECLARE @c TIME;
+INSERT INTO Randevu (RandevuTarihi ,RandevuSaati      ,HastaID      ,DoktorID) VALUES (@b,@c,@d,@e);
+
+ŞİFRE YENİLEME
+SELECT * FROM Sifre WHERE TCKimlikNo = @a;
+UPDATE Sifre SET Sifre ='@a' WHERE TCKimlikNo = @b;
+
+ADRES YENİLEME
+DECLARE @a INT;
+SELECT CONCAT(Sehir, '/' ,Ilce,' ', AcikAdres) AS Adres FROM Adres WHERE HastaID = @a;
+UPDATE Adres SET SEHİR ='@a', Ilce = '@b', AcikAdres = '@c'  WHERE TCKimlikNo = @b;
+
+
+
