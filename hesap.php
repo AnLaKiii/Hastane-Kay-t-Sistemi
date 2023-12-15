@@ -1,3 +1,10 @@
+<?php
+session_start();
+if(!isset($_SESSION['hasta'])){
+    header("Location: /Hastane-Kayit-Sistemi/login.php");
+    exit;
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

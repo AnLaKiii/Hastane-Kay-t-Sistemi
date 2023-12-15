@@ -1,3 +1,10 @@
+<?php
+session_start();
+if(!isset($_SESSION['hasta'])){
+    header("Location: /Hastane-Kayit-Sistemi/login.php");
+    exit;
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,45 +20,78 @@
     <div class="mx-auto mt-3">
         <div class="toast1" style="--toastColor:#0f0">
             <div class="toast-content">
-                <i class="fas fa-solid fa-check check"></i>
+                <i id="toastIcon" class="fas fa-solid fa-check check"></i>
                 <div class="message">
                     <span class="text text-1">Başarılı</span>
-                    <span class="text text-2">Randevu Oluşturuldu</span>
+                    <span class="text text-2">Güncelleme Uygulandı</span>
                 </div>
             </div>
             <i class="fa-solid fa-xmark close"></i>
-
             <div class="progress"></div>
         </div>
-        <div class="row">
-            <form action="" id="randevuAl" class="col-11 col-lg-8 col-xxl-6 mx-auto">
-                <label for="bolum">Bölüm</label>
-                <select class="form-select shadow-none mb-3" id="bolum" name="bolum">
-                    <option selected>Seçilmedi</option>
-                    <option value="bolum1">Bolum 1</option>
-                    <option value="bolum2">Bolum 2</option>
-                    <option value="bolum3">Bolum 3</option>
-                    <option value="bolum4">Bolum 4</option>
-                </select>
-                <label for="doktor">Doktor</label>
-                <select class="form-select shadow-none mb-3" id="doktor" name="doktor">
-                    <option selected>Seçilmedi</option>
-                    <option value="doktor1">Doktor 1</option>
-                    <option value="doktor2">Doktor 2</option>
-                    <option value="doktor3">Doktor 3</option>
-                    <option value="doktor4">Doktor 4</option>
-                </select>
-                <label for="tarihSec">Tarih Seçiniz:</label>
-                <input type="date" class="form-control mb-3" id="tarihSec">
-                <label for="saat">Saat</label>
-                <select class="form-select shadow-none mb-3" id="saat" name="saat">
-                    <option selected>Seçilmedi</option>
-                    <option value="09:00">09:00</option>
-                    <option value="09:10" disabled>09:10</option>
-                    <option value="09:20">09:20</option>
-                    <option value="09:30">09:30</option>
-                </select>
-                <button type="submit" class="btn btn-primary">Randevu Al</button>
+        <div class="">
+            <form action="" id="randevuAl" class="w-100">
+                <div class="row m-0 ">
+                    <div class="col-11 col-sm-8 col-lg-6 col-xxl-4">
+                        <label class="mb-5" for="bolum">Bölüm</label>
+                        <p>Randevu almak istediğn bölümü seç.</p>
+                        <select class="inputs form-select shadow-none mb-3" id="bolum" name="bolum">
+                            <option value="0">Seçilmedi</option>
+                            <option value="bolum1">Bolum 1</option>
+                            <option value="bolum2">Bolum 2</option>
+                            <option value="bolum3">Bolum 3</option>
+                            <option value="bolum4">Bolum 4</option>
+                        </select>
+                        <div class="w-100  d-flex justify-content-end">
+                            <button  class="btn btn-primary btnI disabled">İleri</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row m-0 d-none">
+                    <div class="col-11 col-sm-8 col-lg-6 col-xxl-4">
+                        <label class="mb-5" for="doktor">Doktor</label>
+                        <p>Randevu almak istediğiniz dokrotu seçin</p>
+                        <select class="inputs form-select shadow-none mb-3" id="doktor" name="doktor">
+                            <option value="0">Seçilmedi</option>
+                            <option value="doktor1">Doktor 1</option>
+                            <option value="doktor2">Doktor 2</option>
+                            <option value="doktor3">Doktor 3</option>
+                            <option value="doktor4">Doktor 4</option>
+                        </select>
+                        <div class="w-100  d-flex justify-content-between">
+                            <button class="btn btn-primary btnG">Geri</button>
+                            <button class="btn btn-primary btnI disabled">İleri</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row m-0 d-none">
+                    <div class="col-11 col-sm-8 col-lg-6 col-xxl-4">
+                        <label class="mb-5" for="tarihSec">Tarih Seçiniz</label>
+                        <p>Randevu almak istediniz tarihi seçin</p>
+                        <input type="date" class="inputs form-control mb-3" id="tarihSec" name="date">
+                        <div class="w-100  d-flex justify-content-between">
+                            <button class="btn btn-primary btnG">Geri</button>
+                            <button class="btn btn-primary btnI disabled">İleri</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row m-0 d-none">
+                    <div class="col-11 col-sm-8 col-lg-6 col-xxl-4">
+                        <label class="mb-5" for="saat">Saat</label>
+                        <p>Randevu almak istediğiniz saati seçin</p>
+                        <select class="inputs form-select shadow-none mb-3" id="saat" name="saat">
+                            <option value="0">Seçilmedi</option>
+                            <option value="09:00">09:00</option>
+                            <option value="09:10" disabled>09:10</option>
+                            <option value="09:20">09:20</option>
+                            <option value="09:30">09:30</option>
+                        </select>
+                        <div class="w-100  d-flex justify-content-between">
+                            <button class="btn btn-primary btnG">Geri</button>
+                            <button type="submit" class="btn btn-primary btnI disabled">Randevu Al</button>
+                        </div>
+                    </div>
+                </div>
             </form>
         </div>    
     </div>
@@ -95,10 +135,6 @@
     });
 
     
-    var randevuAl = document.getElementById("randevuAl");
-    randevuAl.addEventListener("submit", function(event){
-        event.preventDefault();
-    });
 
     // Toast Message
     const button = document.querySelector(".btn"),
@@ -112,4 +148,61 @@
     closeIcon.addEventListener("click", () => {
         toast.classList.remove("active")
     });
+    var randevual = document.getElementById("randevuAl");
+    randevual.addEventListener("submit",function(e){
+        e.preventDefault();
+    });
+    var forms = document.querySelectorAll("#randevuAl > div");
+    var inputs = document.querySelectorAll("#randevuAl > div > div > .inputs");
+    var bolumBtnI = document.querySelectorAll(".btnI");
+    var bolumBtnG = document.querySelectorAll(".btnG");
+    inputs.forEach(function(input,i){
+        input.setAttribute("sec",i)
+        input.addEventListener("change",function(e){
+            var id = e.target.getAttribute("sec");
+            if(e.target.value != 0){
+                bolumBtnI[id].classList.remove("disabled");
+            }
+            else{
+                bolumBtnI[id].classList.add("disabled");
+            }
+        });
+    });
+    bolumBtnI.forEach(function(btnI,i){
+        btnI.setAttribute("sec",i)
+        btnI.addEventListener("click",function(e){  
+            var id = e.target.getAttribute("sec");
+            if(id != "3"){
+                forms[id].classList.add("d-none");
+                forms[parseInt(id)+1].classList.remove("d-none");
+            }
+            else{
+                var formData = new FormData(randevual);
+                var xhr = new XMLHttpRequest();
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState == 4 && xhr.status == 200) {
+                        var val = xhr.responseText;
+                        if(val == "1"){
+                            var toast = document.querySelector(".toast1").classList.add("toastActive");
+                            setTimeout(function(){
+                                window.location.href = "/Hastane-Kayit-Sistemi/";
+                            },1500);
+                        }
+                    }
+                };
+                xhr.open("POST", "php/script.php?val=randevu", true);
+                xhr.send(formData);
+            }
+           
+        });
+    });
+    bolumBtnG.forEach(function(btnG,i){
+        btnG.setAttribute("sec",i)
+        btnG.addEventListener("click",function(e){  
+            var id = e.target.getAttribute("sec");
+            forms[parseInt(id)+1].classList.add("d-none");
+            forms[parseInt(id)].classList.remove("d-none");
+        });
+    });
+
 </script>

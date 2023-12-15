@@ -1,3 +1,11 @@
+<?php
+session_start();
+if(isset($_SESSION['hasta'])){
+    header("Location: /Hastane-Kayit-Sistemi");
+    exit;
+}
+
+?>
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -20,7 +28,7 @@
                         <input class="form-control mb-2 mt-1 inputNumber" placeholder="12345678910" type="text" maxlength="11" name="tckn" id="logintckn">
                         <label for="password">Şifre</label>
                         <input class="form-control mb-2 mt-1" type="password" name="password" id="loginPassword">
-                        <p class="text-danger mb-2" style="display: none;" id="loginWar">*Hatalı Giriş</p>
+                        <p class="text-danger mb-2" style="display: none;" id="loginWar">*Kullanıcı adı veya şifre hatalı</p>
                         <div class="d-flex"> 
                             <input class="mb-3" type="checkbox" name="showPass" id="showPass">
                             <label for="showPass" class="ms-2">Şifreyi Göster</label>
@@ -69,10 +77,32 @@ kaydol.addEventListener("submit",function(event){
     }
     else{
         tckn.style.border = "none";
+        password.style.border = "none";
         loginWar.style.display = "none";
     }
     
-    if(!error){kaydol.submit();}
+    if(!error){
+        var formData = new FormData(kaydol);
+
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                var val = xhr.responseText;
+                if(val == "0"){
+                    tckn.style.border = "1px solid rgb(245, 55, 55)";
+                    password.style.border = "1px solid rgb(245, 55, 55)";
+                    loginWar.style.display = "flex";
+                }
+                else if(val == "1"){
+                    window.location.href = "/Hastane-Kayit-Sistemi/";
+                }               
+            }
+        };
+
+        xhr.open("POST", "php/script.php?val=giris", true);
+        xhr.send(formData);
+    
+    }
     
 });
 </script>

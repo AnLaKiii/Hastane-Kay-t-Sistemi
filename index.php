@@ -1,3 +1,10 @@
+<?php
+session_start();
+if(!isset($_SESSION['hasta'])){
+    header("Location: /Hastane-Kayit-Sistemi/login.php");
+    exit;
+}
+?>
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -10,6 +17,7 @@
 </head>
 <body id="userMainPage"> 
     <?php include "php/navbar.php";?>
+    <?php include "php/connect.php";?>
     <section class="pt-3 px-2 flex-xxl-row flex-column d-flex w-100" style="z-index: 0;" >
         <div class="col-xxl-2 mb-2">
             <div class="row ms-0 w-100">

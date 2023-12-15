@@ -38,7 +38,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="login.php">
+                    <a href="php/script.php?val=cikis">
                         <i class="fa-solid fa-right-to-bracket"></i>
                         <p>Çıkış</p>
                     </a>

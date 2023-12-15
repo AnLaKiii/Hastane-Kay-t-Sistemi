@@ -45,7 +45,7 @@
 }
 
 nav{
-   position: absolute;
+   position: fixed;
    top: 0;
    z-index: 100;
    width: 100%;
@@ -313,6 +313,38 @@ footer{
     display: flex;
 }
 
+
+/***************************/
+/********Randevu Al*********/
+/***************************/
+
+#randevuAl > div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+#randevuAl > div{
+    height: calc(100vh - 6rem);
+}
+#randevuAl label{
+    font-size: 4rem;
+    font-weight: 800;
+    color: #167585;
+}
+
+@media only screen and (max-width: 620px) {
+    #randevuAl label{
+        font-size: 3rem;
+    }
+}
+@media only screen and (max-width: 450px) {
+    #randevuAl label{
+        font-size: 2.5rem;
+    }
+}
+
+
 /***************************/
 /******Tosat Message********/
 /***************************/
@@ -332,7 +364,7 @@ footer{
     transition: all 0.5s cubic-bezier(0.92, 0.03, 0, 1);
 }
 
-.toast1.active{
+.toast1.toastActive{
     transform: translate(-50%, 0px);
 }
 
@@ -342,7 +374,7 @@ footer{
     align-items: center;
 }
 
-.toast-content .check{
+.toast-content #toastIcon{
     height: 35px;
     width: 35px;
     display: flex;
@@ -414,3 +446,13 @@ footer{
 }
 
 
+@media only screen and (max-width: 700px) {
+    .toast1{
+        width: 80%;
+    }
+}
+@media only screen and (max-width: 500px) {
+    .toast1{
+        width: 100%;
+    }
+}

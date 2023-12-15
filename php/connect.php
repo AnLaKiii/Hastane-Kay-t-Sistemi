@@ -8,7 +8,7 @@
 $sunucu = "localhost";
 $kullanici ="root";
 $sifre = "";
-$adi ="abdulbakidemir";
+$adi ="Hastane";
 
 $conn = new mysqli($sunucu,$kullanici,$sifre,$adi);
 if ($conn->connect_error) {

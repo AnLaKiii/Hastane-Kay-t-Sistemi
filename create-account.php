@@ -1,3 +1,10 @@
+<?php
+session_start();
+if(isset($_SESSION['hasta'])){
+    header("Location: /Hastane-Kayit-Sistemi");
+    exit;
+}
+?>
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -6,6 +13,7 @@
     <title>Kaydol</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="fontawesome/css/all.css">
 </head>
 <body class="position-relative">
     <div id="login-main-page-background"></div>
@@ -15,7 +23,7 @@
                 <div class="login-card-background"></div>
                 <div class="card-body">
                     <h3 class="fw-bold title">Kayıt Ol</h3>
-                    <form id="kaydol" action="">
+                    <form id="kaydol" >
                         <label class="mt-2" for="name">İsim</label>
                         <input class="form-control mt-1" type="text" name="name" id="namei">
                         <p class="text-danger mb-0 mt-1" id="nameWar" style="display: none;">*Lütfen isim girin</p>
@@ -37,6 +45,9 @@
                         <label class="" for="tel">Tel</label>
                         <input class="form-control mt-1 inputNumber" type="tel" name="tel" id="tel" maxlength="10" placeholder="(555) 555 55 55">
                         <p class="text-danger mb-0 mt-1" id="telWar" style="display: none;">*Lütfen geçerli bir telefon numarası girin</p>
+                        <label class="mt-2" for="email">E-posta</label>
+                        <input class="form-control mt-1" type="email" name="email" id="email" placeholder="email@mail.com">
+                        <p class="text-danger mb-0 mt-1" id="emailWar" style="display: none;">*Lütfen e-posta girin</p>
                         <label class="mt-2" for="date">Doğum Tarihi</label>
                         <input class="form-control mt-1" type="date" name="date" id="date">
                         <p class="text-danger mb-0 mt-1" id="dateWar" style="display: none;">*Lütfen doğum tarihi girin</p>
@@ -45,8 +56,20 @@
                     <hr>
                 </div>
                 <p class="px-2 text-center text-wrap" style="max-width: 400px;">Giriş yapmak için <a href="login.php">buraya</a> tıklayın.</p>
-
             </div>
+        </div>
+    </div>
+    <div class="mx-auto mt-3">
+        <div class="toast1" style="--toastColor:#0f0">
+            <div class="toast-content">
+                <i id="toastIcon" class="fas fa-solid fa-check check"></i>
+                <div class="message">
+                    <span class="text text-1">Başarılı</span>
+                    <span class="text text-2">Güncelleme Uygulandı</span>
+                </div>
+            </div>
+            <i class="fa-solid fa-xmark close"></i>
+            <div class="progress"></div>
         </div>
     </div>
 </body>
@@ -54,6 +77,16 @@
 
 <script src="js/bootstrap.bundle.min.js"></script>
 <script>
+
+const   toast = document.querySelector(".toast1"),
+        toastIcon = document.getElementById("toastIcon"),
+        closeIcon = document.querySelector(".close");
+var toastMessage = document.querySelectorAll(".toast1 .text");
+closeIcon.addEventListener("click", () => {
+    toast.classList.remove("toastActive")
+});
+
+
 var inputNumber = document.querySelectorAll(".inputNumber");
 for (var i = 0; i < inputNumber.length ; i++){
     inputNumber[i].addEventListener("keydown", function(event){
@@ -81,7 +114,9 @@ var tcWar = document.getElementById("tcWar");
 var passWar = document.getElementById("passWar");
 var passCheckWar = document.getElementById("passCheckWar");
 var tel = document.getElementById("tel");
-var telWar = document.getElementById("telWar"); 
+var telWar = document.getElementById("telWar");
+var email = document.getElementById("email");
+var emailWar = document.getElementById("emailWar");  
 var date = document.getElementById("date");
 var dateWar = document.getElementById("dateWar");
 var kaydol = document.getElementById("kaydol");
@@ -133,6 +168,15 @@ kaydol.addEventListener("submit",function(event){
         tel.style.border = "none";
         telWar.style.display = "none";
     }
+    if(email.value == "" || email.value.length < 10){
+        email.style.border = "1px solid rgb(245, 55, 55)";
+        emailWar.style.display = "flex";
+        error = true;
+    }
+    else{
+        email.style.border = "none";
+        emailWar.style.display = "none";
+    }
     if(date.value == ""){
         date.style.border = "1px solid rgb(245, 55, 55)";
         dateWar.style.display = "flex";
@@ -154,7 +198,50 @@ kaydol.addEventListener("submit",function(event){
         passCheckWar.style.display = "none";
     
     }
-    if(!error){kaydol.submit();}
+    if(!error){
+        // FormData nesnesi oluştur ve formu içine ekle
+        var formData = new FormData(kaydol);
+
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                var val = xhr.responseText;
+                if(val == "0"){
+                    toast.classList.remove("toastActive");
+                    setTimeout(function(){
+                        toastIcon.classList.value = "fa-solid fa-exclamation";
+                        toast.style.setProperty('--toastColor', '#ffda09');
+                        toastMessage[0].innerHTML = "Hata";
+                        toastMessage[1].innerHTML = "Bu TC sistemde kayıtlı";
+                        toast.classList.add("toastActive");
+                    },500);
+                }
+                else if(val == "1"){
+                    toast.classList.remove("toastActive");
+                    setTimeout(function(){
+                        toastIcon.classList.value = "fa-solid fa-check";
+                        toast.style.setProperty('--toastColor', '#0f0');
+                        toastMessage[0].innerHTML = "Başarılı";
+                        toastMessage[1].innerHTML = "Kayıt başarıyla oluşturuldu";
+                        toast.classList.add("toastActive");
+                    },500);
+                }
+                else if(val == "2"){
+                    toast.classList.remove("toastActive");
+                    setTimeout(function(){
+                        toastIcon.classList.value = "fa-solid fa-x";
+                        toast.style.setProperty('--toastColor', '#f00');
+                        toastMessage[0].innerHTML = "Hata";
+                        toastMessage[1].innerHTML = "Veriler sisteme yüklenirken hata oluştu";
+                        toast.classList.add("toastActive");
+                    },500);
+                }
+            }
+        };
+
+        xhr.open("POST", "php/script.php?val=kayit", true);
+        xhr.send(formData);
+}
     
 });
 </script>
