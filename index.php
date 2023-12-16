@@ -99,7 +99,7 @@ if(!isset($_SESSION['hasta'])){
         var qrCodes = document.querySelectorAll(".qrcode");
         for(var i = 0; i < qrCodes.length; i ++){
             var val = qrCodes[i].getAttribute("value");
-            const qr = new QRious({ element: qrCodes[i], value: "https://abdulbakidemir.com?val="+val, size: 800 , backgroundAlpha: 0});
+            const qr = new QRious({ element: qrCodes[i], value: "https://abdulbakidemir.com/Hastane-Kayit-Sistemi/randevular.php?val="+val, size: 800 , backgroundAlpha: 0});
         }
     }};
     xhr.open("POST", "php/script.php?val=randevular", true);

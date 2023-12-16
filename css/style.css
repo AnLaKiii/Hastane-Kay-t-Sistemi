@@ -354,7 +354,7 @@ footer{
 /******Tosat Message********/
 /***************************/
 .toast1{
-    z-index: 1000;
+    z-index: 1001;
     position: fixed;
     top: 20px;
     left: 50%;

@@ -20,7 +20,7 @@ if(!isset($_SESSION['hasta'])){
 <body style="margin-top:6rem">
     <?php include "php/navbar.php";
         include "php/connect.php";
-        $SQL = "SELECT Hasta.*, CONCAT(AcikAdres,' - ',Ilce,' / ',Sehir) AS Adres FROM Hasta
+        $SQL = "SELECT Hasta.*, Adres.*, CONCAT(AcikAdres,' - ',Ilce,' / ',Sehir) AS Adres FROM Hasta
         INNER JOIN Adres ON Hasta.HastaID = Adres.HastaID
         WHERE Hasta.HastaID = ".$_SESSION["hasta"];
         $result = $conn->query($SQL);
@@ -125,19 +125,40 @@ if(!isset($_SESSION['hasta'])){
             </div>
             <hr>
             <form action="" id="cominSetForm" class="w-100 px-0 mx-0">
-                <label for="" class="w-100">
-                    Telefon
-                    <input type="tel" class="w-100 inputNumber" maxlength="10" placeholder="(555) 555 55 55">
+                <label for="" class="w-100 d-flex justify-content-center align-items-end">
+                    <div class="w-100">
+                        Telefon
+                        <input type="tel" class="w-100 inputNumber" id="telefon" maxlength="10" placeholder="(555) 555 55 55" value="<?php echo $row["HastaTelefonNo"]; ?>">
+                    </div>
+                    <button class="btn btn-primary ms-2" id="duzenle1">Değiştir</button>
                 </label>
-                <label for="" class="w-100">
-                    E-posta
-                    <input type="email" class="w-100">
+                <div class="alert alert-danger d-none" id="telefonWarr" role="alert">
+                    Geçersiz telefon numarası.
+                </div>
+                <label for="" class="w-100 d-flex justify-content-center align-items-end">
+                    <div class="w-100">
+                        E-posta
+                        <input type="email" class="w-100" id="eposta" value="<?php echo $row["HastaEmail"];?>">
+                    </div>
+                    <button class="btn btn-primary ms-2" id="duzenle2">Değiştir</button>
                 </label>
-                <label for="" class="w-100">
-                    Adres
-                    <input type="text" class="w-100">
+                <label for="" class="w-100 d-flex justify-content-center align-items-end">
+                    <div class="w-100 d-flex justify-content-between">
+                        <div style="width:30%">
+                            İl
+                            <input type="text" class="w-100" id="il" value="<?php echo $row["Sehir"]; ?>">
+                        </div>
+                        <div style="width:30%">
+                            İlçe
+                            <input type="text" class="w-100" id="ilce" value="<?php echo $row["Ilce"]; ?>">
+                        </div>
+                        <div style="width:30%">
+                            Açık Adres
+                            <input type="text" class="w-100" id="acikAdres" value="<?php echo $row["AcikAdres"]; ?>">
+                        </div>
+                    </div>
+                    <button class="btn btn-primary ms-2" style="width: 84.16px;" id="duzenle3">Değiştir</button>
                 </label>
-                <button class="btn btn-primary">Bilgileri Güncelle</button>
             </form>
         </div>
     </div>
@@ -243,18 +264,67 @@ if(!isset($_SESSION['hasta'])){
     var cominSetForm = document.getElementById("cominSetForm");
     cominSetForm.addEventListener("submit", function(event){
         event.preventDefault();
-        var check = true;
-        if(password.value.length < 8){
-            check = false;
-        }
-        if(passwordCheck.value != password.value){
-            check = false;
-        }
-        if(check){
-            toast.classList.add("toastActive")
+    });
+
+    var duzenle1 = document.getElementById("duzenle1");
+    var duzenle2 = document.getElementById("duzenle2");
+    var duzenle3 = document.getElementById("duzenle3");
+    var inputTel = document.getElementById("telefon");
+    var inputEposta = document.getElementById("eposta");
+    var il = document.getElementById("il");
+    var ilce = document.getElementById("ilce");
+    var acikAdres = document.getElementById("acikAdres");
+    var inputTelWarr = document.getElementById("telefonWarr");
+    duzenle1.addEventListener("click",function(e){
+        if(inputTel.value.length >= 10){
+            var formData = new FormData();
+            formData.append("telefon",inputTel.value);
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                if(xhr.response == 1){
+                    toast.classList.add("toastActive");
+                    inputTelWarr.classList.add("d-none");
+                }
+                else{
+                    inputTelWarr.innerHTML = "Bu telefon numarası kullanılıyor";
+                    inputTelWarr.classList.remove("d-none");
+                }
+            }};
+            xhr.open("POST", "php/script.php?val=telUpdate", true);
+            xhr.send(formData);
         }
         else{
-
+            inputTelWarr.innerHTML = "Hatalı telefon numarası"
+            inputTelWarr.classList.remove("d-none");
         }
+    });
+    duzenle2.addEventListener("click",function(e){
+        var formData = new FormData();
+        formData.append("email",inputEposta.value);
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            if(xhr.response == 1){
+                toast.classList.add("toastActive");
+            }
+        }};
+        xhr.open("POST", "php/script.php?val=mailUpdate", true);
+        xhr.send(formData);
+    });
+    duzenle3.addEventListener("click",function(e){
+        var formData = new FormData();
+        formData.append("il",il.value);
+        formData.append("ilce",ilce.value);
+        formData.append("acikAdres",acikAdres.value);
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            if(xhr.response == 1){
+                toast.classList.add("toastActive");
+            }
+        }};
+        xhr.open("POST", "php/script.php?val=adresUpdate", true);
+        xhr.send(formData);
     });
 </script>

@@ -9,6 +9,7 @@
         <a class="logo" href="./" >
             <img src="img/logo.png" alt="">
         </a>
+        <!--
         <li class="">
             <div id="search-box1">
                 <div id="input-box1">
@@ -18,6 +19,7 @@
                 </div>
             </div>
         </li>
+        -->
         <li class="my-nav-item toggle-drop">
             <div class="user-image-1">
                 <img src="img/user.png" alt="">

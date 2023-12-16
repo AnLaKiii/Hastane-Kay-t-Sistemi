@@ -262,6 +262,52 @@ if($getVal == "randevular"){
     }
     $conn->close();   
 }
+
+if($getVal == "telUpdate"){
+    include "connect.php";
+    session_start();
+    $a = $_POST["telefon"];
+    $SQL = "SELECT HastaTelefonNo FROM Hasta WHERE HastaTelefonNo = '$a'";
+    $result = $conn->query($SQL);
+    if($result->num_rows >= 1){
+        echo 0;
+    }
+    else {
+        $SQL = "UPDATE Hasta SET  HastaTelefonNo = '$a'  WHERE HastaID =".$_SESSION["hasta"];
+        $conn->query($SQL);
+        echo 1;
+    }
+    $conn->close();  
+}
+if($getVal == "mailUpdate"){
+    include "connect.php";
+    session_start();
+    $a = $_POST["email"]; 
+    $SQL = "UPDATE Hasta SET  HastaEmail = '$a'  WHERE HastaID =".$_SESSION["hasta"];
+    if($conn->query($SQL)){
+        echo 1;
+    }
+    else{
+        echo 0;
+    }
+    $conn->close();  
+}
+if($getVal == "adresUpdate"){
+    include "connect.php";
+    session_start();
+    $a = $_POST["il"]; 
+    $b = $_POST["ilce"]; 
+    $c = $_POST["acikAdres"]; 
+    $SQL = "UPDATE Adres SET Sehir ='$a', Ilce = '$b', AcikAdres = '$c'  WHERE HastaID = ".$_SESSION["hasta"];
+    if($conn->query($SQL)){
+        echo 1;
+    }
+    else{
+        echo 0;
+    }
+    $conn->close();  
+}
+
 if($getVal == "cikis"){
     session_start();    
     session_destroy();
