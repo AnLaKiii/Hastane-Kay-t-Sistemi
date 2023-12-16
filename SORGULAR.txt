@@ -1,7 +1,7 @@
 DOKTOR RANDEVU SEÇME
 SELECT DoktorID, CONCAT(DoktorAdi, ' ', DoktorSoyadi) AS DoktorIsım FROM Doktor
 INNER JOIN
-BolumAdi ON Doktor.DoktorBolumID = BolumAdi.BolumID;
+BolumAdi ON Doktor.DoktorBolumID = BolumAdi.BolumID WHERE BolumID = @a;
 
 
 BÖLÜM SEÇME
