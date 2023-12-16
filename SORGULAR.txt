@@ -32,5 +32,12 @@ SELECT CONCAT(Sehir, '/' ,Ilce,' ', AcikAdres) AS Adres FROM Adres WHERE HastaID
 UPDATE Adres SET SEHİR ='@a', Ilce = '@b', AcikAdres = '@c'  WHERE TCKimlikNo = @b;
 
 
+git pull origin main
+
+SELECT Sifre
+FROM Sifre
+WHERE TCKimlikNo = (SELECT TCKimlikNo FROM Hasta WHERE HastaID = HastaID);
+
+
 
 
