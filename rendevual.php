@@ -48,11 +48,6 @@ if(!isset($_SESSION['hasta'])){
                         <label class="mb-5" for="doktor">Doktor</label>
                         <p>Randevu almak istediğiniz dokrotu seçin</p>
                         <select class="inputs form-select shadow-none mb-3" id="doktor" name="doktor">
-                            <option value="0">Seçilmedi</option>
-                            <option value="doktor1">Doktor 1</option>
-                            <option value="doktor2">Doktor 2</option>
-                            <option value="doktor3">Doktor 3</option>
-                            <option value="doktor4">Doktor 4</option>
                         </select>
                         <div class="w-100  d-flex justify-content-between">
                             <button class="btn btn-primary btnG">Geri</button>
@@ -65,6 +60,9 @@ if(!isset($_SESSION['hasta'])){
                         <label class="mb-5" for="tarihSec">Tarih Seçiniz</label>
                         <p>Randevu almak istediniz tarihi seçin</p>
                         <input type="date" class="inputs form-control mb-3" id="tarihSec" name="date">
+                        <div class="alert alert-danger d-none" role="alert" id="dateAlert">
+                            Bu tarihteki tüm randevular dolu. Başka bir tarih seç.
+                        </div>
                         <div class="w-100  d-flex justify-content-between">
                             <button class="btn btn-primary btnG">Geri</button>
                             <button class="btn btn-primary btnI disabled">İleri</button>
@@ -76,11 +74,6 @@ if(!isset($_SESSION['hasta'])){
                         <label class="mb-5" for="saat">Saat</label>
                         <p>Randevu almak istediğiniz saati seçin</p>
                         <select class="inputs form-select shadow-none mb-3" id="saat" name="saat">
-                            <option value="0">Seçilmedi</option>
-                            <option value="09:00">09:00</option>
-                            <option value="09:10" disabled>09:10</option>
-                            <option value="09:20">09:20</option>
-                            <option value="09:30">09:30</option>
                         </select>
                         <div class="w-100  d-flex justify-content-between">
                             <button class="btn btn-primary btnG">Geri</button>
@@ -148,6 +141,7 @@ if(!isset($_SESSION['hasta'])){
     randevual.addEventListener("submit",function(e){
         e.preventDefault();
     });
+    var dateAlert = document.getElementById("dateAlert");
     var forms = document.querySelectorAll("#randevuAl > div");
     var inputs = document.querySelectorAll("#randevuAl > div > div > .inputs");
     var bolumBtnI = document.querySelectorAll(".btnI");
@@ -162,7 +156,7 @@ if(!isset($_SESSION['hasta'])){
                     input.innerHTML = input.innerHTML + xhr.response;
                 }
             };
-            xhr.open("POST", "php/script.php?val=randevu&doc=1", true);
+            xhr.open("POST", "php/script.php?val=randevu&bol=1", true);
             xhr.send(formData);
         }
         input.addEventListener("change",function(e){
@@ -172,6 +166,36 @@ if(!isset($_SESSION['hasta'])){
             }
             else{
                 bolumBtnI[id].classList.add("disabled");
+            }
+            if(id == 0){
+                var formData = new FormData();
+                formData.append("bolum",input.value);
+                var xhr = new XMLHttpRequest();
+                xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    inputs[1].innerHTML = xhr.response;
+                }};
+                xhr.open("POST", "php/script.php?val=randevu&doc=1", true);
+                xhr.send(formData);
+            }
+            else if(id == 2){
+                var formData = new FormData();
+                formData.append("doktorID",inputs[1].value);
+                formData.append("date",inputs[2].value);
+                var xhr = new XMLHttpRequest();
+                xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    if(xhr.response == ""){
+                        dateAlert.classList.remove("d-none");
+                        bolumBtnI[2].classList.add("disabled");
+                    }
+                    else{
+                        dateAlert.classList.add("d-none");
+                        inputs[3].innerHTML = xhr.response;
+                    }
+                }};
+                xhr.open("POST", "php/script.php?val=randevu&date=1", true);
+                xhr.send(formData);
             }
         });
     });
@@ -184,20 +208,24 @@ if(!isset($_SESSION['hasta'])){
                 forms[parseInt(id)+1].classList.remove("d-none");
             }
             else{
+                e.target.classList.add("disabled");
                 var formData = new FormData(randevual);
                 var xhr = new XMLHttpRequest();
                 xhr.onreadystatechange = function () {
                     if (xhr.readyState == 4 && xhr.status == 200) {
                         var val = xhr.responseText;
-                        if(val == "1"){
+                        if(val == 1){
                             var toast = document.querySelector(".toast1").classList.add("toastActive");
                             setTimeout(function(){
                                 window.location.href = "/Hastane-Kayit-Sistemi/";
                             },1500);
                         }
+                        else{
+                            e.target.classList.remove("disabled");
+                        }
                     }
                 };
-                xhr.open("POST", "php/script.php?val=randevu", true);
+                xhr.open("POST", "php/script.php?val=randevu&fin=1", true);
                 xhr.send(formData);
             }
            

@@ -55,44 +55,92 @@ if($getVal == "giris"){
     else{
         echo 0;
     }
+    $conn->close();  
 }
 if($getVal == "randevu"){
-    if($_GET["doc"] == "1"){
+    if(isset($_GET["bol"])){
         session_start();
         if(isset($_SESSION['hasta'])){
-            echo "
-                <option value='bolum1'>Bölüm 1</option>
-                <option value='bolum2'>Bölüm 2</option>
-                <option value='bolum3'>Bölüm 3</option>
-                <option value='bolum4'>Bölüm 4</option>
-                <option value='bolum5'>Bölüm 5</option>"
-                ;
-        }
-        
-    }
-    /*
-    include "connect.php";
-    $sorgu = "SELECT * FROM Sifre WHERE TCKimlikNo = $a";
-    $result = $conn->query($sorgu);
-    if ($result->num_rows > 0) {
-        $row = $result->fetch_assoc();
-        if($row["Sifre"] == $b){
-            echo 1;
-            $sorgu = "SELECT HastaID FROM Hasta WHERE TCKimlikNo = $a";
+            include "connect.php";
+            $sorgu = "SELECT * FROM BolumAdi;";
             $result = $conn->query($sorgu);
-            $row = $result->fetch_assoc();
-            session_start();
-            $_SESSION['hasta'] = $row['HastaID'];
-        }
-        else{
-            echo 0;
+            if ($result->num_rows > 0) {
+                while($row = $result->fetch_assoc()) {
+                    echo "<option value='".$row["BolumID"]."'>".$row["BolumAdi"]."</option>";
+                }
+            } else {
+                echo "";
+            }
+            $conn->close();  
         }
     }
-    else{
-        echo 0;
+    if(isset($_GET["doc"])){
+        $bolum = $_POST["bolum"];
+        session_start();
+        echo "<option value='0'>Seçilmedi</option>";
+        if(isset($_SESSION['hasta'])){
+            include "connect.php";
+            $sorgu = "SELECT DoktorID, CONCAT(DoktorAdi, ' ', DoktorSoyadi) AS DoktorIsim FROM Doktor
+                        INNER JOIN
+                        BolumAdi ON Doktor.DoktorBolumID = BolumAdi.BolumID WHERE BolumID = $bolum";
+            $result = $conn->query($sorgu);
+            if ($result->num_rows > 0) {
+                while($row = $result->fetch_assoc()) {
+                    echo "<option value='".$row["DoktorID"]."'>".$row["DoktorIsim"]."</option>";
+                }
+            } else {
+                echo "";
+            }
+            $conn->close();  
+        }
     }
-    */
-    echo 1;
+    if(isset($_GET["date"])){
+        $times =["09:00:00","10:00:00","11:00:00","12:00:00","13:00:00","14:00:00","15:00:00","16:00:00"];
+        $doktorID = $_POST["doktorID"];
+        $date = $_POST["date"];
+        session_start();
+        echo "<option value='0'>Seçilmedi</option>";
+        if(isset($_SESSION['hasta'])){
+            include "connect.php";
+            $sorgu = "SELECT RandevuSaati FROM Randevu WHERE DoktorID = $doktorID AND RandevuTarihi = '$date' ORDER BY RandevuSaati";
+            $result = $conn->query($sorgu);
+            $row = $result->fetch_all();
+            $length = count($row);
+            $j = 0;
+            if ($length >= 0 && $length < 8) {
+                foreach($times as $i => $time){
+                    if($row[$j][0]==$time){
+                        echo "<option value='".$time."' disabled>".$time."</option>";
+                        if($j<$length-1){
+                            $j = $j+1;
+                        }
+                    }
+                    else{
+                        echo "<option value='".$time."'>".$time."</option>";
+                    }
+                }
+                    
+            }
+            else {
+                echo "";
+            }
+            $conn->close();  
+        }
+    }
+    if(isset($_GET["fin"])){
+        session_start();
+        if(isset($_SESSION['hasta'])){
+            $hastaID = $_SESSION['hasta'];
+            $doktorID = $_POST["doktor"];
+            $date = $_POST["date"];
+            $time = $_POST["saat"];
+            include "connect.php";
+            $sorgu = "INSERT INTO Randevu (RandevuTarihi,RandevuSaati,HastaID,DoktorID) VALUES ('$date','$time',$hastaID,$doktorID);";
+            $result = $conn->query($sorgu);
+            $conn->close();  
+            echo 1;
+        }
+    }
 }
 if($getVal == "cikis"){
     session_start();    
