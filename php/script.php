@@ -4,8 +4,8 @@ ini_set('display_errors', 1);
 $getVal = $_GET["val"];
 
 if($getVal == "kayit"){
-    $a = $_POST["name"];
-    $b = $_POST["lastName"];
+    $a = ucfirst(strtolower($_POST["name"]));
+    $b = ucfirst(strtolower($_POST["lastName"]));
     $c = $_POST["tckn"];
     $d = $_POST["tel"];
     $e = $_POST["email"];
@@ -186,6 +186,7 @@ if($getVal == "randevular"){
             $currentDateTime = new DateTime();
             $i += 1;
             if ($dateTime > $currentDateTime){
+                $row["RandevuTarihi"] = date("d.n.Y", strtotime($row["RandevuTarihi"]));
                 echo "
                     <div class='col-lg-3 col-md-4 col-sm-6 col-12 p-2 pt-0 pb-3 rese-info ranActive'>
                         <div class='rounded-0 card'>
@@ -259,6 +260,7 @@ if($getVal == "randevular"){
     } else {
         echo "";
     }
+    $conn->close();   
 }
 if($getVal == "cikis"){
     session_start();    

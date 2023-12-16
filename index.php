@@ -18,7 +18,12 @@ if(!isset($_SESSION['hasta'])){
 <body id="userMainPage"> 
     <?php include "php/navbar.php";?>
     <?php include "php/connect.php";
-    
+    $SQL = "SELECT Hasta.*, CONCAT(AcikAdres,' - ',Ilce,' / ',Sehir) AS Adres FROM Hasta
+    INNER JOIN Adres ON Hasta.HastaID = Adres.HastaID
+    WHERE Hasta.HastaID = ".$_SESSION["hasta"];
+    $result = $conn->query($SQL);
+    $row = $result->fetch_assoc();
+    $row["DogumTarihi"] = date("d.n.Y", strtotime($row["DogumTarihi"]));
     $conn->close();
     ?>
 
@@ -54,21 +59,21 @@ if(!isset($_SESSION['hasta'])){
             <div class="card person-info rounded-bottom">
                 <div class="card-body">
                     <div class="d-flex align-items-center">
-                        <h5 class="card-title mb-0 fw-bold">Abdülbaki Demir</h5>
+                        <h5 class="card-title mb-0 fw-bold"><?php echo $row["HastaAdi"]." ".$row["Soyadi"] ?></h5>
                     </div>
                     <hr>
                     <ul class="p-0">
                         <li>
                             <i class="fa-solid fa-id-badge"></i>
-                            <small>75248652485</small>
+                            <small><?php echo $row["TCKimlikNo"]?></small>
                         </li>
                         <li>
                             <i class="fa-solid fa-calendar"></i>
-                            <small>16.06.2002</small>
+                            <small><?php echo $row["DogumTarihi"]?></small>
                         </li>
                         <li>
                             <i class="fa-solid fa-location-dot"></i>
-                            <small>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam, veniam!</small>
+                            <small><?php echo $row["Adres"]?><small>
                         </li>
                     </ul>
                 </div>

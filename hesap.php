@@ -1,4 +1,6 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 session_start();
 if(!isset($_SESSION['hasta'])){
     header("Location: /Hastane-Kayit-Sistemi/login.php");
@@ -16,7 +18,16 @@ if(!isset($_SESSION['hasta'])){
     <link rel="stylesheet" href="fontawesome/css/all.css">
 </head>
 <body style="margin-top:6rem">
-    <?php include "php/navbar.php";?>
+    <?php include "php/navbar.php";
+        include "php/connect.php";
+        $SQL = "SELECT Hasta.*, CONCAT(AcikAdres,' - ',Ilce,' / ',Sehir) AS Adres FROM Hasta
+        INNER JOIN Adres ON Hasta.HastaID = Adres.HastaID
+        WHERE Hasta.HastaID = ".$_SESSION["hasta"];
+        $result = $conn->query($SQL);
+        $row = $result->fetch_assoc();
+        $row["DogumTarihi"] = date("d.n.Y", strtotime($row["DogumTarihi"]));
+        $conn->close();
+    ?>
     <div class="container-xxl hesap">
         <div class="row">
             <div class="col-11 col-md-8 col-xl-6 mx-auto">
@@ -26,19 +37,19 @@ if(!isset($_SESSION['hasta'])){
                     <tbody class="px-3 row gap-2">
                         <tr class="row">
                             <th class="col-4">İsim:</th>
-                            <td class="col-8">Ali</td>
+                            <td class="col-8"><?php echo $row["HastaAdi"] ;?></td>
                         </tr>
                         <tr class="row">
                             <th class="col-4">Soyisim:</th>
-                            <td class="col-8">Adıgüzel</td>
+                            <td class="col-8"><?php echo $row["Soyadi"] ;?></td>
                         </tr>
                         <tr class="row">
                             <th class="col-4">TCKN</th>
-                            <td class="col-8">25896314785</td>
+                            <td class="col-8"><?php echo $row["TCKimlikNo"] ;?></td>
                         </tr>
                         <tr class="row">
                             <th class="col-4">Doğum Tarihi</th>
-                            <td class="col-8">15/07/1998</td>
+                            <td class="col-8"><?php echo $row["DogumTarihi"] ;?></td>
                         </tr>
                     </tbody>
                 </table>
@@ -51,15 +62,15 @@ if(!isset($_SESSION['hasta'])){
                     <tbody class="px-3 row gap-2">
                         <tr class="row">
                             <th class="col-4">Telefon:</th>
-                            <td class="col-8">(555) 555 55 55</td>
+                            <td class="col-8"><?php echo $row["HastaTelefonNo"] ;?></td>
                         </tr>
                         <tr class="row">
                             <th class="col-4">E-posta</th>
-                            <td class="col-8">deneme@hastane.com</td>
+                            <td class="col-8"><?php echo $row["HastaEmail"] ;?></td>
                         </tr>
                         <tr class="row">
                             <th class="col-4">Adres</th>
-                            <td class="col-8">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Velit, praesentium!</td>
+                            <td class="col-8"><?php echo $row["Adres"] ;?></td>
                         </tr>
                     </tbody>
                 </table>
