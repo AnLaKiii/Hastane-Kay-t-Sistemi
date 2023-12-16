@@ -263,6 +263,11 @@ nav .logo > img{
     margin: 0 1rem;
     font-weight: 600;
 }
+#randevular i{
+    width: 15px;
+    height: 15px;
+
+}
 
 footer{
     margin-top: 3rem;

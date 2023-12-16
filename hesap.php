@@ -10,7 +10,7 @@ if(!isset($_SESSION['hasta'])){
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Randevu Al</title>
+    <title>Hesap</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="fontawesome/css/all.css">
@@ -70,6 +70,9 @@ if(!isset($_SESSION['hasta'])){
                         Mevcut Şifre
                         <input type="password" id="pass0" class="w-100">
                     </label>
+                    <div class="alert alert-danger d-none" id="sifreErr" role="alert">
+                        Kullanıcı şifren hatalı
+                    </div>
                     <label for="" class="w-100">
                         Yeni Şifre
                         <input type="password" id="pass1" class="w-100">
@@ -78,11 +81,14 @@ if(!isset($_SESSION['hasta'])){
                         Yeni Şifre Tekrar
                         <input type="password" id="pass2" class="w-100">
                     </label>
+                    <div class="alert alert-danger d-none" id="sifreErr2" role="alert">
+                        Yeni girilen şifreler hatalı. 
+                    </div>
                     <label for="showPass" class="ms-2 d-flex align-items-center">
                         <input class="me-2" type="checkbox" name="showPass" id="showPass">
                         Şifreyi Göster
                     </label>
-                    <button class="btn btn-primary">Şifre Güncelle</button>
+                    <button class="btn btn-primary" id="sifreChange">Şifre Güncelle</button>
                 </form>
             </div>
         </div>
@@ -90,7 +96,7 @@ if(!isset($_SESSION['hasta'])){
     <div class="mx-auto mt-3">
         <div class="toast1" style="--toastColor:#0f0">
             <div class="toast-content">
-                <i class="fas fa-solid fa-check check"></i>
+                <i id="toastIcon" class="fas fa-solid fa-check check"></i>
                 <div class="message">
                     <span class="text text-1">Başarılı</span>
                     <span class="text text-2">Güncelleme Uygulandı</span>
@@ -166,13 +172,13 @@ if(!isset($_SESSION['hasta'])){
     }
 
     // Toast Message
-    const button = document.querySelector(".btn"),
+    var button = document.querySelector(".btn"),
         toast = document.querySelector(".toast1")
         closeIcon = document.querySelector(".close"),
 
         
     closeIcon.addEventListener("click", () => {
-        toast.classList.remove("active")
+        toast.classList.remove("toastActive")
     });
 
 
@@ -181,6 +187,8 @@ if(!isset($_SESSION['hasta'])){
     var password0 = document.getElementById("pass0");
     var password = document.getElementById("pass1");
     var passwordCheck = document.getElementById("pass2");
+    var sifreAlert = document.getElementById("sifreErr");
+    var sifreAlert2 = document.getElementById("sifreErr2");
     showCheckBox.addEventListener("click",function(){
         if(showCheckBox.checked){password0.type = "text";;password.type = "text"; passwordCheck.type = "text";}
         else{password0.type = "password";password.type = "password"; passwordCheck.type = "password";}
@@ -197,7 +205,28 @@ if(!isset($_SESSION['hasta'])){
             check = false;
         }
         if(check){
-            toast.classList.add("active")
+            sifreAlert2.classList.add("d-none");
+            sifreAlert.classList.add("d-none");
+            var formData = new FormData();
+            formData.append("sifre",password0.value);
+            formData.append("Ysifre",password.value);
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                if(xhr.response == 1){
+                    toast.classList.add("toastActive");
+                    sifreAlert.classList.add("d-none");
+
+                }
+                else{
+                    sifreAlert.classList.remove("d-none");
+                }
+            }};
+            xhr.open("POST", "php/script.php?val=sifreUpdate", true);
+            xhr.send(formData);
+        }
+        else{
+            sifreAlert2.classList.remove("d-none");
         }
     });
     var cominSetForm = document.getElementById("cominSetForm");
@@ -211,7 +240,10 @@ if(!isset($_SESSION['hasta'])){
             check = false;
         }
         if(check){
-            toast.classList.add("active")
+            toast.classList.add("toastActive")
+        }
+        else{
+
         }
     });
 </script>

@@ -32,12 +32,6 @@
                     </a>
                 </li>
                 <li>
-                    <a href="">
-                        <i class="fa-solid fa-calendar"></i>
-                        <p>Randevularım</p>
-                    </a>
-                </li>
-                <li>
                     <a href="php/script.php?val=cikis">
                         <i class="fa-solid fa-right-to-bracket"></i>
                         <p>Çıkış</p>

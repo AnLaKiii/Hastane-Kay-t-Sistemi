@@ -17,7 +17,11 @@ if(!isset($_SESSION['hasta'])){
 </head>
 <body id="userMainPage"> 
     <?php include "php/navbar.php";?>
-    <?php include "php/connect.php";?>
+    <?php include "php/connect.php";
+    
+    $conn->close();
+    ?>
+
     <section class="pt-3 px-2 flex-xxl-row flex-column d-flex w-100" style="z-index: 0;" >
         <div class="col-xxl-2 mb-2">
             <div class="row ms-0 w-100">
@@ -31,121 +35,18 @@ if(!isset($_SESSION['hasta'])){
                         </div>
                     </div>  
                 </a>
-                <a href="" class="text-white col-12 col-sm-6 col-xxl-12 mb-2">
-                    <div class="card card-color rounded-0">
-                        <div class="card-body">
-                            <div class="d-flex align-items-center">
-                                <i class="fa-solid fa-calendar"></i>
-                                <h5 class="card-title mb-0 ms-2">Randevularım</h5>
-                            </div>
-                        </div>
-                    </div>  
-                </a>
             </div>
         </div>
-        <div class="col-xxl-8 flex-wrap">
+        <div class="col-xxl-8 flex-wrap" style="min-height: 100vh;">
             <div class="mx-2 col  col-md-6 col-lg-3">
                 <select class="form-select shadow-none mb-3" id="filtre" name="filtre">
-                    <option selected value="1">hepsi</option>
-                    <option value="2">Aktif</option>
-                    <option value="3">Tamamlanan</option>
-                    <option value="4">Tamamlanamayan</option>
+                    <option selected value="1">Tüm Randevular</option>
+                    <option value="2">Aktif Randevular</option>
+                    <option value="3">Geçmiş Pasif</option>
                 </select>
             </div>
-            <div class="d-flex flex-wrap w-100">
-                <div class="col-lg-3 col-md-4 col-sm-6 col-12 p-2 pt-0 pb-3 rese-info">
-                    <div class="rounded-0 card">
-                        <canvas class="qrcode p-4"></canvas>
-                        <div class="card-body">
-                            <h5 class="card-title fw-bold">Şehir Hastanesi <small class="text-warning">(aktif)</small></h5>
-                            <hr>
-                            <ul class="p-0">
-                                <li>
-                                    <i class="fa-solid fa-clipboard"></i>
-                                    <small>Kardiyoloji</small>
-                                </li>
-                                <li>
-                                    <i class="fa-solid fa-user-doctor"></i>
-                                    <small>Mehmet Gözütok</small>
-                                </li>
-                                <li>
-                                    <i class="fa-solid fa-calendar"></i>
-                                    <small>25.12.2023</small>
-                                </li>
-                                <li>
-                                    <i class="fa-solid fa-clock"></i>
-                                    <small>11:30</small>
-                                </li>
-                                <li>
-                                    <i class="fa-solid fa-location-dot"></i>
-                                    <small>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam, veniam!</small>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 col-12 p-2 pt-0 pb-3 rese-info">
-                    <div class="rounded-0 card">
-                        <canvas class="qrcode p-4"></canvas>
-                        <div class="card-body">
-                            <h5 class="card-title fw-bold">Şehir Hastanesi <small class="text-danger">(iptal)</small></h5>
-                            <hr>
-                            <ul class="p-0">
-                                <li>
-                                    <i class="fa-solid fa-clipboard"></i>
-                                    <small>Kardiyoloji</small>
-                                </li>
-                                <li>
-                                    <i class="fa-solid fa-user-doctor"></i>
-                                    <small>Mehmet Gözütok</small>
-                                </li>
-                                <li>
-                                    <i class="fa-solid fa-calendar"></i>
-                                    <small>25.08.2023</small>
-                                </li>
-                                <li>
-                                    <i class="fa-solid fa-clock"></i>
-                                    <small>11:30</small>
-                                </li>
-                                <li>
-                                    <i class="fa-solid fa-location-dot"></i>
-                                    <small>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam, veniam!</small>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 col-12 p-2 pt-0 pb-3 rese-info">
-                    <div class="rounded-0 card">
-                        <canvas class="qrcode p-4"></canvas>
-                        <div class="card-body">
-                            <h5 class="card-title fw-bold">Şehir Hastanesi <small class="text-success">(tamamlandı)</small></h5>
-                            <hr>
-                            <ul class="p-0">
-                                <li>
-                                    <i class="fa-solid fa-clipboard"></i>
-                                    <small>Kardiyoloji</small>
-                                </li>
-                                <li>
-                                    <i class="fa-solid fa-user-doctor"></i>
-                                    <small>Mehmet Gözütok</small>
-                                </li>
-                                <li>
-                                    <i class="fa-solid fa-calendar"></i>
-                                    <small>25.07.2023</small>
-                                </li>
-                                <li>
-                                    <i class="fa-solid fa-clock"></i>
-                                    <small>11:30</small>
-                                </li>
-                                <li>
-                                    <i class="fa-solid fa-location-dot"></i>
-                                    <small>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam, veniam!</small>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+            <div class="d-flex flex-wrap w-100" id="randevular">
+
             </div>
         </div>
         <div class="col-xxl-2">
@@ -184,6 +85,21 @@ if(!isset($_SESSION['hasta'])){
 <script src="js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/qrious@4.0.2/dist/qrious.min.js"></script>
 <script>
+
+    var randevular = document.getElementById("randevular");
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function () {
+    if (xhr.readyState == 4 && xhr.status == 200) {
+        randevular.innerHTML = xhr.response;
+        var qrCodes = document.querySelectorAll(".qrcode");
+        for(var i = 0; i < qrCodes.length; i ++){
+            var val = qrCodes[i].getAttribute("value");
+            const qr = new QRious({ element: qrCodes[i], value: "https://abdulbakidemir.com?val="+val, size: 800 , backgroundAlpha: 0});
+        }
+    }};
+    xhr.open("POST", "php/script.php?val=randevular", true);
+    xhr.send();
+
     var togleDrop = document.querySelector(".toggle-drop");
     togleDrop.addEventListener("click",function(event){
         var dropDown = document.querySelector(".toggle-drop .drop-ul");
@@ -199,43 +115,53 @@ if(!isset($_SESSION['hasta'])){
             dropUl.classList.remove("active");
         }
     });
-var search_box =document.getElementById("search-box1");
-var input_box =document.getElementById("input-box1");
-var search_button =document.getElementById("search-button1");
-var write = document.getElementById("write1");
-var input = document.getElementById("input1");
-var change = document.getElementById("sadas");
 
-function click(){
-    change.style.setProperty('--num','100');
-    change.classList.toggle("saw");
-}
+    var filtre = document.getElementById("filtre");
+    filtre.addEventListener("change",function(e){
+        var val = e.target.value;
+        if(val == 1){
+            var ranBoxes = document.querySelectorAll(".ranPasive.d-none");
+            ranBoxes.forEach(function(ranBox){
+                ranBox.classList.remove("d-none");
+            });
+            var ranBoxes = document.querySelectorAll(".ranActive.d-none");
+            ranBoxes.forEach(function(ranBox){
+                ranBox.classList.remove("d-none");
+            });
+        }
+        else if(val == 2){
+            var ranBoxes = document.querySelectorAll(".ranPasive.d-none");
+            ranBoxes.forEach(function(ranBox){
+                ranBox.classList.remove("d-none");
+            });
+            var ranBoxes = document.querySelectorAll(".ranPasive");
+            ranBoxes.forEach(function(ranBox){
+                ranBox.classList.add("d-none");
+            });
+            var ranBoxes = document.querySelectorAll(".ranActive.d-none");
+            ranBoxes.forEach(function(ranBox){
+                ranBox.classList.remove("d-none");
+            });
+        }
+        else if(val == 3){
+            var ranBoxes = document.querySelectorAll(".ranActive.d-none");
+            ranBoxes.forEach(function(ranBox){
+                ranBox.classList.remove("d-none");
+            });
+            var ranBoxes = document.querySelectorAll(".ranActive");
+            ranBoxes.forEach(function(ranBox){
+                ranBox.classList.add("d-none");
+            });
+            var ranBoxes = document.querySelectorAll(".ranPasive.d-none");
+            ranBoxes.forEach(function(ranBox){
+                ranBox.classList.remove("d-none");
+            });
+        }
+    });
 
 
-function showHint(str){
-    if(str.length != 0){
-        var xhr = new XMLHttpRequest();
-            var data = JSON.stringify({ input: str })
-            xhr.open('GET', 'verileri_getir.php?input='+str, true);
-            xhr.setRequestHeader('Content-Type', 'application/json');
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState === 4 && xhr.status === 200) {
-                write.innerHTML = xhr.responseText;
-                } else if (xhr.readyState === 4) {
-                }
-            }
-            xhr.send();
-    }
-    else{
-        write.innerHTML = "";
-    }
-}
 
 
-var qrCodes = document.querySelectorAll(".qrcode");
-for(var i = 0; i < qrCodes.length; i ++){
-    const qr = new QRious({ element: qrCodes[i], value: "https://abdulbakidemir.com", size: 800 , backgroundAlpha: 0});
-}
 
 
 </script>

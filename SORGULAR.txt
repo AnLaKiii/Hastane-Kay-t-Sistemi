@@ -7,6 +7,11 @@ BolumAdi ON Doktor.DoktorBolumID = BolumAdi.BolumID WHERE BolumID = @a;
 BÖLÜM SEÇME
 SELECT * FROM BolumAdi;
 
+
+
+
+SELECT RandevuSaati FROM Randevu WHERE DoktorID = $doktorID AND RandevuTarihi = '$date' ORDER BY RandevuSaati
+
 RANDEVU TARİHİ SEÇME
 SELECT COUNT(RandevuSaati) AS Adet, RandevuTarihi  FROM Randevu WHERE DoktorID = 1 
 GROUP BY RandevuTarihi ;

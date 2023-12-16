@@ -99,7 +99,6 @@ if($getVal == "randevu"){
         $doktorID = $_POST["doktorID"];
         $date = $_POST["date"];
         session_start();
-        echo "<option value='0'>Seçilmedi</option>";
         if(isset($_SESSION['hasta'])){
             include "connect.php";
             $sorgu = "SELECT RandevuSaati FROM Randevu WHERE DoktorID = $doktorID AND RandevuTarihi = '$date' ORDER BY RandevuSaati";
@@ -109,6 +108,9 @@ if($getVal == "randevu"){
             $j = 0;
             if ($length >= 0 && $length < 8) {
                 foreach($times as $i => $time){
+                    if($i == 0){
+                        echo "<option value='0'>Seçilmedi</option>";
+                    }
                     if($row[$j][0]==$time){
                         echo "<option value='".$time."' disabled>".$time."</option>";
                         if($j<$length-1){
@@ -119,7 +121,6 @@ if($getVal == "randevu"){
                         echo "<option value='".$time."'>".$time."</option>";
                     }
                 }
-                    
             }
             else {
                 echo "";
@@ -140,6 +141,123 @@ if($getVal == "randevu"){
             $conn->close();  
             echo 1;
         }
+    }
+}
+if($getVal == "sifreUpdate"){
+    $a = $_POST["sifre"];  
+    $b = $_POST["Ysifre"];  
+    include "connect.php";
+    session_start();
+    $hastaID=$_SESSION['hasta'];
+    $SQL = "SELECT * FROM Sifre WHERE TCKimlikNo = (SELECT TCKimlikNo FROM Hasta WHERE HastaID = $hastaID);";
+    $result = $conn->query($SQL);
+    $row = $result->fetch_assoc();
+    $c=$row['TCKimlikNo'];
+    if($row["Sifre"]== $a){
+        $SQL = "UPDATE Sifre SET Sifre ='$b' WHERE TCKimlikNo = $c";
+        $result = $conn->query($SQL);
+        echo 1;
+    }
+    else{
+        echo 0;
+    }
+    $conn->close();   
+}
+if($getVal == "randevular"){
+    $format = "Y-m-d-H:i";
+    include "connect.php";
+    session_start();
+    $hastaID=$_SESSION['hasta'];
+    $SQL = "SELECT 
+            Randevu.RandevuID,
+            Randevu.RandevuTarihi,
+            SUBSTRING(Randevu.RandevuSaati, 1, 5) AS RandevuSaati,
+            CONCAT( Doktor.DoktorAdi, ' ' ,Doktor.DoktorSoyadi) AS DoktorAdiSoyadi, 
+            BolumAdi.BolumAdi
+            FROM Randevu
+            LEFT JOIN Doktor ON Randevu.DoktorID = Doktor.DoktorID 
+            LEFT JOIN BolumAdi ON Doktor.DoktorBolumID = BolumAdi.BolumID WHERE HastaID = $hastaID ORDER BY CONCAT(RandevuTarihi, ' ', RandevuSaati) ASC";
+    $result = $conn->query($SQL);
+    $i = 0;
+    if ($result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+            $yourDateTimeString = $row["RandevuTarihi"]."-".$row["RandevuSaati"];
+            $dateTime = DateTime::createFromFormat($format, $yourDateTimeString);
+            $currentDateTime = new DateTime();
+            $i += 1;
+            if ($dateTime > $currentDateTime){
+                echo "
+                    <div class='col-lg-3 col-md-4 col-sm-6 col-12 p-2 pt-0 pb-3 rese-info ranActive'>
+                        <div class='rounded-0 card'>
+                            <canvas class='qrcode p-4' value='".$row["RandevuID"]."'></canvas>
+                            <div class='card-body'>
+                                <h5 class='card-title fw-bold'>KB Hastanesi<small class='text-success'>(aktif)</small></h5>
+                                <hr>
+                                <ul class='p-0 mb-0'>
+                                    <li>
+                                        <i class='fa-solid fa-clipboard'></i>
+                                        <small>".$row["BolumAdi"]."</small>
+                                    </li>
+                                    <li>
+                                        <i class='fa-solid fa-user-doctor'></i>
+                                        <small>".$row["DoktorAdiSoyadi"]."</small>
+                                    </li>
+                                    <li>
+                                        <i class='fa-solid fa-calendar'></i>
+                                        <small>".$row["RandevuTarihi"]."</small>
+                                    </li>
+                                    <li>
+                                        <i class='fa-solid fa-clock'></i>
+                                        <small>".$row["RandevuSaati"]."</small>
+                                    </li>
+                                    <li>
+                                        <a href='randevudetay.php?val=".$row["RandevuID"]."' target='_blank' >
+                                            <button class='btn btn-dark mb-2'>Detay</button>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>";         
+            }
+            else{
+                echo "
+                    <div class='col-lg-3 col-md-4 col-sm-6 col-12 p-2 pt-0 pb-3 rese-info ranPasive'>
+                        <div class='rounded-0 card'>
+                            <canvas class='qrcode p-4' value='".$row["RandevuID"]."'></canvas>
+                            <div class='card-body'>
+                                <h5 class='card-title fw-bold'>KB Hastanesi<small class='text-danger'>(Aktif Değil)</small></h5>
+                                <hr>
+                                <ul class='p-0 mb-0'>
+                                    <li>
+                                        <i class='fa-solid fa-clipboard'></i>
+                                        <small>".$row["BolumAdi"]."</small>
+                                    </li>
+                                    <li>
+                                        <i class='fa-solid fa-user-doctor'></i>
+                                        <small>".$row["DoktorAdiSoyadi"]."</small>
+                                    </li>
+                                    <li>
+                                        <i class='fa-solid fa-calendar'></i>
+                                        <small>".$row["RandevuTarihi"]."</small>
+                                    </li>
+                                    <li>
+                                        <i class='fa-solid fa-clock'></i>
+                                        <small>".$row["RandevuSaati"]."</small>
+                                    </li>
+                                    <li>
+                                        <a href='randevudetay.php?val=".$row["RandevuID"]."' target='_blank' >
+                                            <button class='btn btn-dark mb-2'>Detay</button>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>";
+            }
+        }
+    } else {
+        echo "";
     }
 }
 if($getVal == "cikis"){
