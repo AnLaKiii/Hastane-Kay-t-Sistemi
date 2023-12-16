@@ -38,6 +38,38 @@ SELECT Sifre
 FROM Sifre
 WHERE TCKimlikNo = (SELECT TCKimlikNo FROM Hasta WHERE HastaID = HastaID);
 
+Bütün hasta bilgileri
+DECLARE @a INT;
+SELECT Hasta.*, CONCAT([Sehir],[Ilce],[AcikAdres]) AS Adres
+FROM Hasta
+INNER JOIN Adres ON Hasta.HastaID = Adres.HastaID
+WHERE Hasta.HastaID = @a;
 
+BÜTÜN RANDEVU BİLGİLERİ
+DECLARE @a INT;
+SELECT
+    R.RandevuID,
+    R.RandevuTarihi,
+    R.RandevuSaati,
+    CONCAT(D.DoktorAdi, ' ', D.DoktorSoyadi) AS DoktorAdSoyad,
+    B.BolumAdi AS DoktorBolum
+FROM
+    Randevu R
+INNER JOIN Doktor D ON R.DoktorID = D.DoktorID
+INNER JOIN BolumAdi B ON D.DoktorBolumID = B.BolumID
+WHERE
+    R.HastaID = @a;
+
+HASTA TELEFON GÜNCELLEME
+DECLARE @a INT;
+DECLARE @b CHAR;
+SELECT * FROM Hasta WHERE HastaID = @a;
+UPDATE Hasta SET  HastaTelNo = '@b'  WHERE HastaID = @a;
+
+HASTA EMAİL GÜNCELLEME
+DECLARE @a INT;
+DECLARE @b CHAR;
+SELECT * FROM Hasta WHERE HastaID = @a;
+UPDATE Hasta SET  HastaTelNo = '@b'  WHERE HastaID = @a;
 
 
