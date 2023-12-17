@@ -249,15 +249,15 @@ nav .logo > img{
     background-color: #1fa7be;
 }
 
-.person-info ul li:not(:last-child) , .rese-info ul li:not(:last-child){
+.person-info ul li , .rese-info ul li{
     display: flex;
     flex-direction: row;
     align-items: center;
     padding: 0;
     margin-bottom: 0.5rem;
 }
-.person-info ul li:last-child , .rese-info ul li:last-child{
-    align-items: start;
+.person-info ul li , .rese-info ul li{
+    align-items: center;
 }
 .person-info ul li small , .rese-info ul li small{
     margin: 0 1rem;

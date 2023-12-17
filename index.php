@@ -30,7 +30,7 @@ if(!isset($_SESSION['hasta'])){
     <section class="pt-3 px-2 flex-xxl-row flex-column d-flex w-100" style="z-index: 0;" >
         <div class="col-xxl-2 mb-2">
             <div class="row ms-0 w-100">
-                <a href="rendevual.php" class="text-white col-12 col-sm-6 col-xxl-12 mb-2">
+                <a href="rendevual.php" class="text-white col-12 mb-2">
                     <div class="card card-color rounded-0 ">
                         <div class="card-body">
                             <div class="d-flex align-items-center">
@@ -88,7 +88,7 @@ if(!isset($_SESSION['hasta'])){
 
 
 <script src="js/bootstrap.bundle.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/qrious@4.0.2/dist/qrious.min.js"></script>
+<script src="js/qrious.min.js"></script>
 <script>
 
     var randevular = document.getElementById("randevular");
@@ -99,7 +99,7 @@ if(!isset($_SESSION['hasta'])){
         var qrCodes = document.querySelectorAll(".qrcode");
         for(var i = 0; i < qrCodes.length; i ++){
             var val = qrCodes[i].getAttribute("value");
-            const qr = new QRious({ element: qrCodes[i], value: "https://abdulbakidemir.com/Hastane-Kayit-Sistemi/randevular.php?val="+val, size: 800 , backgroundAlpha: 0});
+            const qr = new QRious({ element: qrCodes[i], value: "randevudetay.php?val="+val, size: 800 , backgroundAlpha: 0});
         }
     }};
     xhr.open("POST", "php/script.php?val=randevular", true);

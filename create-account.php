@@ -51,6 +51,18 @@ if(isset($_SESSION['hasta'])){
                         <label class="mt-2" for="date">Doğum Tarihi</label>
                         <input class="form-control mt-1" type="date" name="date" id="date">
                         <p class="text-danger mb-0 mt-1" id="dateWar" style="display: none;">*Lütfen doğum tarihi girin</p>
+                        
+
+                        <label class="mt-2" for="sehir">Şehir</label>
+                        <input class="form-control mt-1" type="text" name="sehir" id="sehir">
+                        <p class="text-danger mb-0 mt-1" id="sehirWar" style="display: none;">*Lütfen boş bırakmayın</p>
+                        <label class="mt-2" for="ilce">İlçe</label>
+                        <input class="form-control mt-1" type="text" name="ilce" id="ilce">
+                        <p class="text-danger mb-0 mt-1" id="ilceWar" style="display: none;">*Lütfen boş bırakmayın</p>
+                        <label class="mt-2" for="acikAdres">Açık Adres</label>
+                        <input class="form-control mt-1" type="text" name="acikAdres" id="acikAdres">
+                        <p class="text-danger mb-0 mt-1" id="acikAdresWar" style="display: none;">*Lütfen boş bırakmayın</p>
+
                         <button type="submit" class="btn btn-primary ms-auto mt-3">Kaydol</button>
                     </form>
                     <hr>
@@ -119,6 +131,12 @@ var email = document.getElementById("email");
 var emailWar = document.getElementById("emailWar");  
 var date = document.getElementById("date");
 var dateWar = document.getElementById("dateWar");
+var sehir = document.getElementById("sehir");
+var sehirWar = document.getElementById("sehirWar");
+var ilce = document.getElementById("ilce");
+var ilceWar = document.getElementById("ilceWar");
+var acikAdres = document.getElementById("acikAdres");
+var acikAdresWar = document.getElementById("acikAdresWar");
 var kaydol = document.getElementById("kaydol");
 kaydol.addEventListener("submit",function(event){
     event.preventDefault();
@@ -168,7 +186,7 @@ kaydol.addEventListener("submit",function(event){
         tel.style.border = "none";
         telWar.style.display = "none";
     }
-    if(email.value == "" || email.value.length < 10){
+    if(email.value == ""){
         email.style.border = "1px solid rgb(245, 55, 55)";
         emailWar.style.display = "flex";
         error = true;
@@ -186,6 +204,33 @@ kaydol.addEventListener("submit",function(event){
         date.style.border = "none";
         dateWar.style.display = "none";
     
+    }
+    if(sehir.value == ""){
+        sehir.style.border = "1px solid rgb(245, 55, 55)";
+        sehirWar.style.display = "flex";
+        error = true;
+    }
+    else{
+        sehir.style.border = "none";
+        sehirWar.style.display = "none";
+    }
+    if(ilce.value == ""){
+        ilce.style.border = "1px solid rgb(245, 55, 55)";
+        ilceWar.style.display = "flex";
+        error = true;
+    }
+    else{
+        ilce.style.border = "none";
+        ilceWar.style.display = "none";
+    }
+    if(acikAdres.value == ""){
+        acikAdres.style.border = "1px solid rgb(245, 55, 55)";
+        acikAdresWar.style.display = "flex";
+        error = true;
+    }
+    else{
+        acikAdres.style.border = "none";
+        acikAdresWar.style.display = "none";
     }
     if(password.value != passwordCheck.value){
         passwordCheck.style.border = "1px solid rgb(245, 55, 55)";

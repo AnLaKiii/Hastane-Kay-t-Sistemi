@@ -11,6 +11,9 @@ if($getVal == "kayit"){
     $e = $_POST["email"];
     $f = $_POST["date"];
     $g = $_POST["password"];
+    $h = ucfirst(strtolower($_POST["sehir"]));
+    $i = ucfirst(strtolower($_POST["ilce"]));
+    $j = ucfirst(strtolower($_POST["acikAdres"]));
     
     include "connect.php";
     
@@ -24,6 +27,13 @@ if($getVal == "kayit"){
         echo "0";
     }
     else if ($conn->multi_query($SQL) === TRUE) {
+        $conn->close();   
+        include "connect.php";
+        $sorgu = "SELECT HastaID FROM Hasta WHERE TCKimlikNo = $c";
+        $result = $conn->query($sorgu);
+        $row = $result->fetch_assoc();
+        $sorgu = "INSERT INTO Adres (HastaID,Sehir,Ilce,AcikAdres) VALUES (".$row["HastaID"].",'$h','$i','$j')";
+        $result = $conn->query($sorgu);
         echo "1";
     } 
     else {    
@@ -189,7 +199,7 @@ if($getVal == "randevular"){
                 $row["RandevuTarihi"] = date("d.n.Y", strtotime($row["RandevuTarihi"]));
                 echo "
                     <div class='col-lg-3 col-md-4 col-sm-6 col-12 p-2 pt-0 pb-3 rese-info ranActive'>
-                        <div class='rounded-0 card'>
+                        <div class='rounded-1 card shadow-sm'>
                             <canvas class='qrcode p-4' value='".$row["RandevuID"]."'></canvas>
                             <div class='card-body'>
                                 <h5 class='card-title fw-bold'>KB Hastanesi<small class='text-success'>(aktif)</small></h5>
@@ -224,7 +234,7 @@ if($getVal == "randevular"){
             else{
                 echo "
                     <div class='col-lg-3 col-md-4 col-sm-6 col-12 p-2 pt-0 pb-3 rese-info ranPasive'>
-                        <div class='rounded-0 card'>
+                        <div class='rounded-1 card shadow-sm'>
                             <canvas class='qrcode p-4' value='".$row["RandevuID"]."'></canvas>
                             <div class='card-body'>
                                 <h5 class='card-title fw-bold'>KB Hastanesi<small class='text-danger'>(Aktif Değil)</small></h5>
