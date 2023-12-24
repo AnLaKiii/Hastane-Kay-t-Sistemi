@@ -88,11 +88,11 @@ if ($result->num_rows > 0) {
         }
         else{
             echo "
-                <div class='col-lg-3 col-md-4 col-sm-6 col-12 p-2 pt-0 pb-3 rese-info ranPasive'>
-                    <div class='rounded-0 card'>
-                        <canvas class='qrcode p-4' value='".$row["RandevuID"]."'></canvas>
+                <div class='col-xxl-4 col-lg-5 col-sm-8 col-12 p-2 pt-0 pb-3 rese-info ranPasive  mx-auto'>
+                    <div class='rounded-1 card shadow mt-5'>
+                        <canvas class='qrcode p-4 w-75 mx-auto my-4'  value='".$row["RandevuID"]."'></canvas>
                         <div class='card-body'>
-                            <h5 class='card-title fw-bold'>KB Hastanesi<small class='text-danger'>(Aktif Değil)</small></h5>
+                            <h5 class='card-title fw-bold'>KB Hastanesi<small class='text-danger'>(pasif)</small></h5>
                             <hr>
                             <table class='w-100'>
                                 <tr class='row flex-nowrap mb-1'>
@@ -131,7 +131,7 @@ if ($result->num_rows > 0) {
                                     <th style='width:1rem'>:</th>
                                     <td>".$randevuID."</td>
                                 </tr>
-                            </table>    
+                            </table>
                         </div>
                     </div>
                 </div>";

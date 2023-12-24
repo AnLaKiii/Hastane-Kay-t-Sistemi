@@ -47,7 +47,7 @@ if(!isset($_SESSION['hasta'])){
                 <select class="form-select shadow-none mb-3" id="filtre" name="filtre">
                     <option selected value="1">Tüm Randevular</option>
                     <option value="2">Aktif Randevular</option>
-                    <option value="3">Geçmiş Pasif</option>
+                    <option value="3">Geçmiş Randevular</option>
                 </select>
             </div>
             <div class="d-flex flex-wrap w-100" id="randevular">

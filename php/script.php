@@ -202,7 +202,7 @@ if($getVal == "randevular"){
                         <div class='rounded-1 card shadow-sm'>
                             <canvas class='qrcode p-4' value='".$row["RandevuID"]."'></canvas>
                             <div class='card-body'>
-                                <h5 class='card-title fw-bold'>KB Hastanesi<small class='text-success'>(aktif)</small></h5>
+                                <h5 class='card-title fw-bold'>KB Hastanesi<small class='text-success'>(Aktif)</small></h5>
                                 <hr>
                                 <ul class='p-0 mb-0'>
                                     <li>
@@ -237,7 +237,7 @@ if($getVal == "randevular"){
                         <div class='rounded-1 card shadow-sm'>
                             <canvas class='qrcode p-4' value='".$row["RandevuID"]."'></canvas>
                             <div class='card-body'>
-                                <h5 class='card-title fw-bold'>KB Hastanesi<small class='text-danger'>(Aktif Değil)</small></h5>
+                                <h5 class='card-title fw-bold'>KB Hastanesi<small class='text-danger'>(Pasif)</small></h5>
                                 <hr>
                                 <ul class='p-0 mb-0'>
                                     <li>
