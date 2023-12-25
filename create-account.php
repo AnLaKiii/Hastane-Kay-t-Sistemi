@@ -23,51 +23,63 @@ if(isset($_SESSION['hasta'])){
                 <div class="login-card-background"></div>
                 <div class="card-body">
                     <h3 class="fw-bold title">Kayıt Ol</h3>
-                    <form id="kaydol" >
-                        <label class="mt-2" for="name">İsim</label>
-                        <input class="form-control mt-1" type="text" name="name" id="namei">
-                        <p class="text-danger mb-0 mt-1" id="nameWar" style="display: none;">*Lütfen isim girin</p>
-                        <label class="mt-2" for="lastName">Soyisim</label>
-                        <input class="form-control mt-1" type="text" name="lastName" id="lastName">
-                        <p class="text-danger mb-0 mt-1" id="lastNameWar" style="display: none;">*Lütfen soyisim girin</p>
-                        <label class="mt-2" for="tckn">TCKN</label>
-                        <input class="form-control mt-1 inputNumber" placeholder="12345678910" maxlength="11" type="text" name="tckn" id="logintckn">
-                        <p class="text-danger mb-0 mt-1" id="tcWar" style="display: none;">*Lütfen geçerli TC kimlik numaranızı girin</p>
-                        <label class="mt-2" for="password">Şifre</label>
-                        <input class="form-control mt-1" placeholder="En az 8 karakter" type="password" name="password" id="loginPassword">
-                        <p class="text-danger mb-0 mt-1" id="passWar" style="display: none;">*Şifre 8 karakterden büyük olmalı</p>
-                        <label class="mt-2" for="passwordCheck">Şifre Kontrol</label>
-                        <input class="form-control mt-1" type="password" name="passwordCheck" id="loginPasswordCheck">
-                        <p class="text-danger mb-0 mt-1" id="passCheckWar" style="display: none;">*Şifre uyuşmuyor</p>
-                        <input class="mb-3" type="checkbox" name="showPass" id="showPass">
-                        <label for="showPass" class="ms-2">Şifreyi Göster</label>
-                        <br>
-                        <label class="" for="tel">Tel</label>
-                        <input class="form-control mt-1 inputNumber" type="tel" name="tel" id="tel" maxlength="10" placeholder="(555) 555 55 55">
-                        <p class="text-danger mb-0 mt-1" id="telWar" style="display: none;">*Lütfen geçerli bir telefon numarası girin</p>
-                        <label class="mt-2" for="email">E-posta</label>
-                        <input class="form-control mt-1" type="email" name="email" id="email" placeholder="email@mail.com">
-                        <p class="text-danger mb-0 mt-1" id="emailWar" style="display: none;">*Lütfen e-posta girin</p>
-                        <label class="mt-2" for="date">Doğum Tarihi</label>
-                        <input class="form-control mt-1" type="date" name="date" id="date">
-                        <p class="text-danger mb-0 mt-1" id="dateWar" style="display: none;">*Lütfen doğum tarihi girin</p>
+                    <form id="kaydol" class="row">
+                        <label class="mt-2 col-12 col-sm-6" for="name">İsim
+                            <input class="form-control mt-1" type="text" name="name" id="namei">
+                            <p class="text-danger mb-0 mt-1" id="nameWar" style="display: none;">*Lütfen isim girin</p>
+                        </label>
+                        <label class="mt-2 col-12 col-sm-6" for="lastName">Soyisim
+                            <input class="form-control mt-1" type="text" name="lastName" id="lastName">
+                            <p class="text-danger mb-0 mt-1" id="lastNameWar" style="display: none;">*Lütfen soyisim girin</p>
+                        </label>
+                        <label class="mt-2 col-12 col-sm-6" for="tckn">TCKN
+                            <input class="form-control mt-1 inputNumber" placeholder="12345678910" maxlength="11" type="text" name="tckn" id="logintckn">
+                            <p class="text-danger mb-0 mt-1" id="tcWar" style="display: none;">*Lütfen geçerli TC kimlik numaranızı girin</p>
+                        </label>
+                        <label class="mt-2 col-12 col-sm-6" for="tel">Tel
+                            <input class="form-control mt-1 inputNumber" type="tel" name="tel" id="tel" maxlength="10" placeholder="(555) 555 55 55">
+                            <p class="text-danger mb-0 mt-1" id="telWar" style="display: none;">*Lütfen geçerli bir telefon numarası girin</p>
+                        </label>
+                        <label class="mt-2 col-12 col-sm-6" for="email">E-posta
+                            <input class="form-control mt-1" type="email" name="email" id="email" placeholder="email@mail.com">
+                            <p class="text-danger mb-0 mt-1" id="emailWar" style="display: none;">*Lütfen e-posta girin</p>
+                        </label>
+                        <label class="mt-2 col-12 col-sm-6" for="date">Doğum Tarihi
+                            <input class="form-control mt-1" type="date" name="date" id="date">
+                            <p class="text-danger mb-0 mt-1" id="dateWar" style="display: none;">*Lütfen doğum tarihi girin</p>
+                        </label>
+                        <label class="mt-2 col-12 col-sm-4" for="sehir">Şehir
+                            <input class="form-control mt-1" type="text" name="sehir" id="sehir">
+                            <p class="text-danger mb-0 mt-1" id="sehirWar" style="display: none;">*Lütfen boş bırakmayın</p>
+                        </label>
+                        <label class="mt-2 col-12 col-sm-4" for="ilce">İlçe
+                            <input class="form-control mt-1" type="text" name="ilce" id="ilce">
+                            <p class="text-danger mb-0 mt-1" id="ilceWar" style="display: none;">*Lütfen boş bırakmayın</p>
+                        </label>
+                        <label class="mt-2 col-12 col-sm-4" for="acikAdres">Açık Adres
+                            <input class="form-control mt-1" type="text" name="acikAdres" id="acikAdres">
+                            <p class="text-danger mb-0 mt-1" id="acikAdresWar" style="display: none;">*Lütfen boş bırakmayın</p>
+                        </label>
+                        <label class="mt-2 col-12 col-sm-6" for="password">Şifre
+                            <input class="form-control mt-1" placeholder="En az 8 karakter" type="password" name="password" id="loginPassword">
+                            <p class="text-danger mb-0 mt-1" id="passWar" style="display: none;">*Şifre 8 karakterden büyük olmalı</p>
+                        </label>
+                        <label class="mt-2 col-12 col-sm-6" for="passwordCheck">Şifre Kontrol
+                            <input class="form-control mt-1" type="password" name="passwordCheck" id="loginPasswordCheck">
+                            <p class="text-danger mb-0 mt-1" id="passCheckWar" style="display: none;">*Şifre uyuşmuyor</p>
+                        </label>
                         
-
-                        <label class="mt-2" for="sehir">Şehir</label>
-                        <input class="form-control mt-1" type="text" name="sehir" id="sehir">
-                        <p class="text-danger mb-0 mt-1" id="sehirWar" style="display: none;">*Lütfen boş bırakmayın</p>
-                        <label class="mt-2" for="ilce">İlçe</label>
-                        <input class="form-control mt-1" type="text" name="ilce" id="ilce">
-                        <p class="text-danger mb-0 mt-1" id="ilceWar" style="display: none;">*Lütfen boş bırakmayın</p>
-                        <label class="mt-2" for="acikAdres">Açık Adres</label>
-                        <input class="form-control mt-1" type="text" name="acikAdres" id="acikAdres">
-                        <p class="text-danger mb-0 mt-1" id="acikAdresWar" style="display: none;">*Lütfen boş bırakmayın</p>
-
-                        <button type="submit" class="btn btn-primary ms-auto mt-3">Kaydol</button>
+                        <label for="showPass" class="my-2 ">
+                            <input class="mb-3" type="checkbox" name="showPass" id="showPass">
+                            Şifreyi Göster
+                        </label>
+                        <br>
+                       
+                        <button type="submit" class="btn btn-primary ms-auto mt-3 col-3">Kaydol</button>
                     </form>
                     <hr>
                 </div>
-                <p class="px-2 text-center text-wrap" style="max-width: 400px;">Giriş yapmak için <a href="login.php">buraya</a> tıklayın.</p>
+                <p class="px-2 text-center text-wrap" style="max-width: 100%;">Giriş yapmak için <a href="login.php">buraya</a> tıklayın.</p>
             </div>
         </div>
     </div>
@@ -77,7 +89,7 @@ if(isset($_SESSION['hasta'])){
                 <i id="toastIcon" class="fas fa-solid fa-check check"></i>
                 <div class="message">
                     <span class="text text-1">Başarılı</span>
-                    <span class="text text-2">Güncelleme Uygulandı</span>
+                    <span class="text text-2">Kayıt Oluşturuldu</span>
                 </div>
             </div>
             <i class="fa-solid fa-xmark close"></i>

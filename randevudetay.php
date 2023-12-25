@@ -1,4 +1,9 @@
 <?php 
+session_start();
+if(!isset($_SESSION['hasta'])){
+    header("Location: /Hastane-Kayit-Sistemi/login.php");
+    exit;
+}
     error_reporting(E_ALL);
     ini_set('display_errors', 1);
     $randevuID = $_GET["val"];
@@ -82,11 +87,13 @@ if ($result->num_rows > 0) {
                                     <td>".$randevuID."</td>
                                 </tr>
                             </table>
+                            <div id='iptalBtn' class='btn btn-danger mt-3'>İptal</div>
                         </div>
                     </div>
                 </div>";         
         }
         else{
+            $recete = (strlen($row["Recete"])>0) ? $row["Recete"] : "Reçete Bulunmuyor";
             echo "
                 <div class='col-xxl-4 col-lg-5 col-sm-8 col-12 p-2 pt-0 pb-3 rese-info ranPasive  mx-auto'>
                     <div class='rounded-1 card shadow mt-5'>
@@ -131,7 +138,14 @@ if ($result->num_rows > 0) {
                                     <th style='width:1rem'>:</th>
                                     <td>".$randevuID."</td>
                                 </tr>
+                                <tr class='row flex-nowrap mb-1'>
+                                    <th style='width:30px'><i class='fa-solid fa-capsules'></i></th>
+                                    <th style='width:7rem'>Reçete</th>
+                                    <th style='width:1rem'>:</th>
+                                    <td>".$recete."</td>
+                                </tr>
                             </table>
+                            <div id='iptalBtn' class='btn btn-danger mt-3'>İptal</div>
                         </div>
                     </div>
                 </div>";
@@ -157,4 +171,23 @@ if ($result->num_rows > 0) {
     var qrCode = document.querySelector(".qrcode");
     var val = qrCode.getAttribute("value");
     const qr = new QRious({ element: qrCode, value: "randevudetay.php?val="+val, size: 800 , backgroundAlpha: 0});
+    var iptalBtn = document.getElementById("iptalBtn");
+    iptalBtn.addEventListener("click",(e)=>{
+        var kullaniciCevabi = confirm("Randevu Siliniyor?");
+        // Kullanıcının seçimine göre işlem yapabilirsiniz
+        if (kullaniciCevabi) {
+            var formData = new FormData();
+            formData.append("randevuID",val);
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                alert(xhr.response);
+                window.location.href = "/Hastane-Kayit-Sistemi/";
+            }};
+            xhr.open("POST", "php/script.php?val=deleteRandevu", true);
+            xhr.send(formData);
+        } 
+    });
+
+
 </script>
