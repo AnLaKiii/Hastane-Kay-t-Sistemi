@@ -17,9 +17,9 @@ if(isset($_SESSION['hasta'])){
 </head>
 <body class="position-relative">
     <div id="login-main-page-background"></div>
-    <div id="login-main-page";>
+    <div id="login-main-page"   >
         <div class="container my-5 py-5">
-            <div class="card bg-transparent mb-2">
+            <div class="card bg-transparent mb-2" style="max-width: 400px">
                 <div class="login-card-background"></div>
                 <div class="card-body">
                     <h3 class="fw-bold title">Giriş Yap</h3>

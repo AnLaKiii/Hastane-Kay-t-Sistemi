@@ -105,13 +105,14 @@ if($getVal == "randevu"){
         }
     }
     if(isset($_GET["date"])){
-        $times =["09:00:00","10:00:00","11:00:00","12:00:00","13:00:00","14:00:00","15:00:00","16:00:00"];
+        date_default_timezone_set('Europe/Istanbul');
+        $times =["09:00","10:00","11:00","12:00","13:00","14:00","15:00","16:00"];
         $doktorID = $_POST["doktorID"];
         $date = $_POST["date"];
         session_start();
         if(isset($_SESSION['hasta'])){
             include "connect.php";
-            $sorgu = "SELECT RandevuSaati FROM Randevu WHERE DoktorID = $doktorID AND RandevuTarihi = '$date' ORDER BY RandevuSaati";
+            $sorgu = "SELECT  TIME_FORMAT(RandevuSaati, '%H:%i') AS RandevuSaati FROM Randevu WHERE DoktorID = $doktorID AND RandevuTarihi = '$date' ORDER BY RandevuSaati";
             $result = $conn->query($sorgu);
             $row = $result->fetch_all();
             $length = count($row);
@@ -121,15 +122,20 @@ if($getVal == "randevu"){
                     if($i == 0){
                         echo "<option value='0'>Seçilmedi</option>";
                     }
-                    if($row[$j][0]==$time){
-                        echo "<option value='".$time."' disabled>".$time."</option>";
-                        if($j<$length-1){
-                            $j = $j+1;
-                        }
+                    if(sizeof($row)>0){
+                        if($row[$j][0]==$time){
+                            echo "<option value='".$time."' disabled>".$time."</option>";
+                            if($j<$length-1){
+                                $j = $j+1;
+                            }
+                        }  
+                        else{
+                            echo "<option value='".$time."'>".$time."</option>";
+                        }  
                     }
                     else{
-                        echo "<option value='".$time."'>".$time."</option>";
-                    }
+                            echo "<option value='".$time."'>".$time."</option>";
+                    } 
                 }
             }
             else {
@@ -272,7 +278,16 @@ if($getVal == "randevular"){
     }
     $conn->close();   
 }
-
+if($getVal == "deleteRandevu"){
+    include "connect.php";
+    session_start();
+    if(isset($_POST["randevuID"])){
+        $SQL = "DELETE FROM Randevu WHERE RandevuID =".$_POST["randevuID"];
+        $conn->query($SQL);
+        echo "Randevu Başarıyla Silindi";
+    }
+    $conn->close();   
+}
 if($getVal == "telUpdate"){
     include "connect.php";
     session_start();

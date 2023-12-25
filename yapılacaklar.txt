@@ -1,8 +1,8 @@
-1- Randevu gün içerisinde saati geçmiş randevuları iptal et
-2- detay alanına iptal bunonu eklenicek. 
-3- kayıt ol alanını düzenle
-4- detay sadece doktor ve kullanıcıcan gözükücek
-5- geçmiş randevular için recete oluşturulucak
+1- Randevu gün içerisinde saati geçmiş randevuları iptal et ?
+2- detay alanına iptal bunonu eklenicek.  +
+3- kayıt ol alanını düzenle +
+4- detay sadece doktor ve kullanıcıcan gözükücek +
+5- geçmiş randevular için recete oluşturulucak +
 
 
 doktor giriş
