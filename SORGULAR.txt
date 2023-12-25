@@ -209,7 +209,53 @@ VALUES
     (10000000099, 'Elif', 'Güneş', 119),
     (10000000100, 'Mehmet', 'Uysal', 100);
 
+İLAÇLAR TABLOSU
+CREATE TABLE Ilac(
+IlacID INT primary key identity(1,1)not null,
+IlacAdi varchar(50) not null,
+);
 
+REÇETE TABLOSU
+
+CREATE TABLE Recete (
+    RandevuID INT NOT NULL,
+    ReceteID INT PRIMARY KEY IDENTITY(1,1) NOT NULL,
+    Ilac1ID INT,
+    Ilac2ID INT,
+    Ilac3ID INT,
+    Ilac4ID INT,
+    FOREIGN KEY (RandevuID) REFERENCES Randevu(RandevuID) ON DELETE CASCADE,
+    FOREIGN KEY (Ilac1ID) REFERENCES Ilac(IlacID),
+    FOREIGN KEY (Ilac2ID) REFERENCES Ilac(IlacID),
+    FOREIGN KEY (Ilac3ID) REFERENCES Ilac(IlacID),
+    FOREIGN KEY (Ilac4ID) REFERENCES Ilac(IlacID)
+);
+
+
+İLAÇ EKLENTİSİ
+-- Ilac tablosunu örnek verilerle doldurma
+INSERT INTO Ilac (IlacAdi)
+VALUES
+    ('Parol'),
+    ('Aspirin'),
+    ('Amoklavin'),
+    ('Ibuprofen'),
+    ('Vitamin C'),
+    ('Panadol'),
+    ('Nurofen'),
+    ('Dekolgen'),
+    ('Ateş düşürücü'),
+    ('Antibiyotik'),
+    ('Alerji hapı'),
+    ('Probiyotik'),
+    ('Migren ilacı'),
+    ('Beta Bloker'),
+    ('Kalp ilacı'),
+    ('Diyabet ilacı'),
+    ('Kanser ilacı'),
+    ('Tiroid ilacı'),
+    ('Romatizma ilacı'),
+    ('Uyku ilacı');
 
 
 
