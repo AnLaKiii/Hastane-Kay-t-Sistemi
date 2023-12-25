@@ -217,19 +217,13 @@ IlacAdi varchar(50) not null,
 
 REÇETE TABLOSU
 
-CREATE TABLE Recete (
-    RandevuID INT NOT NULL,
-    ReceteID INT PRIMARY KEY IDENTITY(1,1) NOT NULL,
-    Ilac1ID INT,
-    Ilac2ID INT,
-    Ilac3ID INT,
-    Ilac4ID INT,
-    FOREIGN KEY (RandevuID) REFERENCES Randevu(RandevuID) ON DELETE CASCADE,
-    FOREIGN KEY (Ilac1ID) REFERENCES Ilac(IlacID),
-    FOREIGN KEY (Ilac2ID) REFERENCES Ilac(IlacID),
-    FOREIGN KEY (Ilac3ID) REFERENCES Ilac(IlacID),
-    FOREIGN KEY (Ilac4ID) REFERENCES Ilac(IlacID)
+CREATE TABLE Recete(
+ReceteID INT primary key identity(1,1) not null,
+ReceteAdi varchar(20) not null,
 );
+
+ALTER TABLE Randevu
+ADD ReceteID INT ;
 
 
 İLAÇ EKLENTİSİ
@@ -257,5 +251,24 @@ VALUES
     ('Romatizma ilacı'),
     ('Uyku ilacı');
 
+
+ ALTER TABLE Recete_Ilac
+ADD CONSTRAINT IlacID
+foreign key (IlacID) references
+Ilac(IlacID) ON DELETE  CASCADE
+
+CREATE TABLE Recete_Ilac(
+ReceteID INT not null,
+IlacID INT not null);
+
+
+ALTER TABLE Recete_Ilac
+ADD CONSTRAINT FK_Recete_Ilac_Recete
+FOREIGN KEY (ReceteID) REFERENCES Recete(ReceteID);
+
+
+ALTER TABLE Randevu
+ADD CONSTRAINT FK_Randevu_Recete
+FOREIGN KEY (ReceteID) REFERENCES Recete(ReceteID);
 
 
