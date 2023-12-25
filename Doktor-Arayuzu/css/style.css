@@ -1,0 +1,462 @@
+*{margin: 0;padding: 0; list-style: none;text-decoration: none!important;}
+/*********************/
+/******* LOGIN *******/
+#login-main-page-background{
+    width: 100%;
+    min-height: 100vh;
+    background-image: url("../img/login_img.jpg");
+    background-repeat: no-repeat;
+    background-position: right;
+    background-size: cover  ;
+    position: fixed;
+    filter: brightness(0.8);
+}
+#login-main-page{
+    width: 100%;
+    min-height: 100vh;
+    color: #fff;
+    display: flex;
+    align-items: center;
+}
+
+#login-main-page .card{
+    color: #fff;
+    border-color: #d6d6d65e;
+    position: relative;
+    box-shadow: 0 0 20px 1px #3b3b3b5e;
+}
+#login-main-page .card .form-control {
+    border-radius: 0!important;
+}
+
+#login-main-page .login-card-background{
+    position: absolute;
+    filter: blur(2x);
+    
+}
+
+/*********************/
+/*** USER MAIN PAGE **/
+#userMainPage{
+    overflow-x: hidden;
+    width: 100%;
+    padding-top: 4.5rem;
+}
+
+nav{
+   position: fixed;
+   top: 0;
+   z-index: 100;
+   width: 100%;
+   background-color: #167585; 
+   color: #fff;
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   box-shadow: 0 0 15px 5px #4747475e;
+}
+nav .logo{
+    height: 3rem;
+    padding: 0.5rem;
+    cursor: pointer;
+}
+nav .logo > img{
+    height: 100%;
+}
+.nav-list{
+    display: flex;
+    justify-content: space-between;
+    padding: 0.8rem;
+    margin-bottom: 0;
+}
+.my-nav-item{
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin: 0 1rem;
+    cursor: pointer;
+}
+.my-nav-item  p{
+    margin:0 0 0 0.6rem;
+    font-weight: 600;
+}
+.user-image-1{
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    padding: 0.2rem;
+    overflow: hidden;
+}
+.user-image-1 > img{
+    width: 100%;
+    filter: invert();
+} 
+.drop-ul{
+    position: absolute;
+    background: #167585;
+    display: none;
+    width: 20rem;
+    right: -1rem;
+    top: 3.5rem;
+    padding: 0.5rem 0;
+}
+.active {
+    display: block!important;
+    box-shadow: 0px 0px 10px 5px #3b3b3b5e;
+    z-index: 1000;
+}
+.drop-ul hr{
+    display: none;
+}
+.drop-ul li{
+    margin: 0.3rem 0;
+    padding: 0.3rem 1rem;
+    width: 20rem;
+}
+.drop-ul li a{
+    display: flex;
+    align-items: center;
+    color: #fff;
+}
+.drop-ul li i{
+    font-size: 1.2rem;
+}
+.drop-ul li:first-child{
+    display: none;
+}
+.drop-ul li:hover{
+    background: #1fa7be;
+}
+@media only screen and (max-width: 600px) {
+    .my-nav-item > p{
+        display: none;
+    }
+    .my-nav-item{
+        position: static ;
+    }
+    .drop-ul{
+        display: block;
+        position: absolute;
+        background: #167585;
+        overflow: hidden;
+        top: 0px;
+        right: 0px;
+        width: 0px;
+        margin: 0;
+        padding: 2rem 0 ;
+        height: 100vh;
+        transition: width 0.4s ease-in;
+    }
+    .drop-ul hr{
+        display: block;
+    }
+    .drop-ul li{
+        margin: 0.3rem 0;
+        padding: 0.7rem 1rem;
+    }
+    .drop-ul li:first-child{
+        display: flex;
+    }
+    .active {
+        width: 15rem;
+    }
+  }
+
+/***********************/
+/*********SEARCH1*******/
+/***********************/
+
+#search-box1{
+    display: flex;
+    width: 17rem;
+    height: 2.6rem ;
+}
+#input-box1{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+#input1{
+    outline: none;
+    width: 4rem;
+    padding: 0 15px;
+    background-color: rgb(116, 223, 250);
+    border: 1px solid #d3d3d3;
+    border-right: none;
+    border-radius: 20px 0px 0px 20px;
+    cursor: text;
+    transition: all 0.2s ease-in;
+    color: #fff;
+}
+#input1::placeholder{
+    color: #fff;
+    transition: all 0.2s;
+}
+#input1:focus::placeholder{
+    color: #888;
+}
+#input1:focus{
+    width: 16rem;
+    background-color: transparent;
+}
+#input1:focus + #write1{
+    display: block;
+}
+#search-button1{
+    width: 4rem;
+    background-color: rgb(234, 59, 59);
+    height: 100%;
+    border: 1px solid #d3d3d3;
+    border-radius: 0px 20px 20px 0px;
+    cursor: pointer;
+}
+#search-button1 i{
+    color: #fff;
+}
+#write1{ 
+    position: absolute; 
+    display: none;
+    width: 50vw;
+    background-color: #fff;
+    border: 1px solid #d3d3d3;
+    border-radius: 10px;
+    top: 4.9rem;
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+
+
+@media only screen and (max-width: 600px) {
+    #search-box1{
+        width: 10rem;
+    }
+    #input1:focus{
+        width: 6rem;
+        background-color: transparent;
+    }
+  }
+
+  /******************************/
+  /******** MAIN SECTION ********/ 
+.card-color{
+    background-color: #167585;
+}
+.card-color:hover{
+    background-color: #1fa7be;
+}
+
+.person-info ul li , .rese-info ul li{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0;
+    margin-bottom: 0.5rem;
+}
+.person-info ul li , .rese-info ul li{
+    align-items: center;
+}
+.person-info ul li small , .rese-info ul li small{
+    margin: 0 1rem;
+    font-weight: 600;
+}
+#randevular i{
+    width: 15px;
+    height: 15px;
+
+}
+
+footer{
+    margin-top: 3rem;
+    background-color: #167585;
+    width: 100%;
+}
+
+/***************************/
+/***********Hesap***********/
+/***************************/
+
+.hesap input  {
+    display: block;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    border: 1px solid #ced4da;
+    background-clip: padding-box;
+    border-radius: 0.375rem;
+    outline: none;
+}
+.hesap label  {
+    margin-bottom: 1rem;
+}
+
+
+#cominSet{
+    display: none;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    z-index: 1000;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    transform: translate(-50%, -50%);
+    background-color: #00000033;
+} 
+#cominSet .card-body{
+    flex: none;
+    background-color: #fff;
+    border-radius: 1rem;
+} 
+#cominSet.active1{
+    display: flex;
+}
+
+
+/***************************/
+/********Randevu Al*********/
+/***************************/
+
+#randevuAl > div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+#randevuAl > div{
+    height: calc(100vh - 6rem);
+}
+#randevuAl label{
+    font-size: 4rem;
+    font-weight: 800;
+    color: #167585;
+}
+
+@media only screen and (max-width: 620px) {
+    #randevuAl label{
+        font-size: 3rem;
+    }
+}
+@media only screen and (max-width: 450px) {
+    #randevuAl label{
+        font-size: 2.5rem;
+    }
+}
+
+
+/***************************/
+/******Tosat Message********/
+/***************************/
+.toast1{
+    z-index: 1001;
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    max-width: 98%;
+    border-radius: 12px;
+    background: #fff;
+    padding: 20px 20px;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+    border-left: 6px solid var(--toastColor);
+    overflow: hidden;
+    transform: translate(-50%, -170px);
+    transition: all 0.5s cubic-bezier(0.92, 0.03, 0, 1);
+}
+
+.toast1.toastActive{
+    transform: translate(-50%, 0px);
+}
+
+.toast1 .toast-content{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.toast-content #toastIcon{
+    height: 35px;
+    width: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--toastColor);
+    color: #fff;
+    font-size: 20px;
+    border-radius: 50%;
+}
+
+.toast-content .message{
+    display: flex;
+    flex-direction: column;
+    margin-left:20px;
+}
+
+.message .text{
+    font-size: 20px;
+    font-weight: 400;;
+    color: #666666;
+}
+
+.message .text.text-1{
+    font-weight: 600;
+    color: #333;
+}
+
+.toast1 .close{
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    padding: 5px;
+    cursor: pointer;
+    opacity: 0.7;
+}
+
+.toast1 .close:hover{
+    opacity: 1;
+}
+
+.toast1 .progress{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    width: 100%;
+    background: #ddd;
+}
+
+
+.toast-button{
+    width: 80px;
+    height: 30px;
+    font-size: 12px;
+    outline: none;
+    border: none;
+    background-color:#11131e;
+    color: whitesmoke;
+    border:1px solid #fff;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.toast-button:hover{
+    background-color: #000000;
+    color: white;
+}
+
+
+@media only screen and (max-width: 700px) {
+    .toast1{
+        width: 80%;
+    }
+}
+@media only screen and (max-width: 500px) {
+    .toast1{
+        width: 100%;
+    }
+}
