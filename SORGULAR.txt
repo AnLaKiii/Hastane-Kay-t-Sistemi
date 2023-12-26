@@ -286,3 +286,22 @@ FROM Hasta
 INNER JOIN Randevu ON Hasta.HastaID = Randevu.HastaID;
 
 SELECT * FROM Hasta_Bilgileri
+
+
+BİR GÜNDE DOKTORA KAÇ HASTA GELECEK
+
+DECLARE @a INT;
+DECLARE @b DATE;
+
+SELECT DoktorID, COUNT(*) AS Randevu_Sayisi
+FROM Randevu
+WHERE DoktorID = @a AND RandevuTarihi = @b
+GROUP BY DoktorID;
+
+REÇETENİN ÇEKİLME Halİ 
+DECLARE @a INT;
+SELECT Recete.ReceteID, Ilac.IlacID, Ilac.IlacAdi
+FROM Recete_Ilac
+INNER JOIN Recete ON Recete.ReceteID = Recete_Ilac.ReceteID
+INNER JOIN Ilac ON Ilac.IlacID = Recete_Ilac.IlacID
+WHERE Recete_Ilac.ReceteID = @a;
