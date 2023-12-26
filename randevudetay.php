@@ -15,12 +15,18 @@ if(!isset($_SESSION['hasta'])){
             CONCAT( Hasta.HastaAdi, ' ' ,Hasta.Soyadi) AS HastaAdiSoyadi,
             SUBSTRING(Randevu.RandevuSaati, 1, 5) AS RandevuSaati,
             CONCAT( Doktor.DoktorAdi, ' ' ,Doktor.DoktorSoyadi) AS DoktorAdiSoyadi, 
+            Recete.ReceteAdi,
             BolumAdi.BolumAdi
             FROM Randevu
-            LEFT JOIN Doktor ON Randevu.DoktorID = Doktor.DoktorID 
-            LEFT JOIN Hasta ON Randevu.HastaID = Hasta.HastaID 
-            LEFT JOIN BolumAdi ON Doktor.DoktorBolumID = BolumAdi.BolumID WHERE RandevuID = $randevuID";
+            INNER JOIN Doktor ON Randevu.DoktorID = Doktor.DoktorID 
+            INNER JOIN Hasta ON Randevu.HastaID = Hasta.HastaID 
+            INNER JOIN BolumAdi ON Doktor.DoktorBolumID = BolumAdi.BolumID 
+            INNER JOIN Recete ON Randevu.RandevuID = Recete.RandevuID  
+            WHERE Randevu.RandevuID = $randevuID";
     $result = $conn->query($SQL);
+    if (!$result) {
+        die("Sorgu hatası: " . $conn->error);
+    }
 ?>
 <!DOCTYPE html>
 <html lang="tr">
@@ -84,7 +90,7 @@ if ($result->num_rows > 0) {
                                     <th style='width:30px'><i class='fa-solid fa-hashtag'></i></th>
                                     <th style='width:7rem'>Randevu ID</th>
                                     <th style='width:1rem'>:</th>
-                                    <td>".$randevuID."</td>
+                                    <td>".$row["ReceteAdi"]."</td>
                                 </tr>
                             </table>
                             <div id='iptalBtn' class='btn btn-danger mt-3'>İptal</div>
@@ -93,7 +99,7 @@ if ($result->num_rows > 0) {
                 </div>";         
         }
         else{
-            $recete = (strlen($row["Recete"])>0) ? $row["Recete"] : "Reçete Bulunmuyor";
+            $recete = (strlen($row["ReceteAdi"])>0) ? $row["ReceteAdi"] : "Reçete Bulunmuyor";
             echo "
                 <div class='col-xxl-4 col-lg-5 col-sm-8 col-12 p-2 pt-0 pb-3 rese-info ranPasive  mx-auto'>
                     <div class='rounded-1 card shadow mt-5'>
