@@ -289,6 +289,15 @@ SELECT * FROM Hasta_Bilgileri
 
 
 BİR GÜNDE DOKTORA KAÇ HASTA GELECEK
+DECLARE @a INT;
+DECLARE @b DATE;
+DECLARE @c DATE;
+
+SELECT RandevuTarihi, COUNT(*) AS Randevu_Sayisi
+FROM Randevu
+WHERE DoktorID = @a AND RandevuTarihi BETWEEN @c AND @b
+GROUP BY RandevuTarihi
+HAVING COUNT(*) > 7;
 
 DECLARE @a INT;
 DECLARE @b DATE;
@@ -297,7 +306,8 @@ DECLARE @c DATE;
 SELECT RandevuTarihi, COUNT(*) AS Randevu_Sayisi
 FROM Randevu
 WHERE DoktorID = @a AND RandevuTarihi BETWEEN @c AND @b
-GROUP BY RandevuTarihi;
+GROUP BY RandevuTarihi
+HAVING COUNT(*) <4;
 
 REÇETENİN ÇEKİLME HALİ 
 
@@ -324,3 +334,8 @@ INSERT INTO Recete (ReceteAdi ) VALUES (@a);
 
 
 
+DECLARE @a INT;
+DECLARE @b DATE;
+SELECT Randevu.RandevuSaati,CONCAT(Hasta.HastaAdi, ' ',Hasta.Soyadi ) AS HastaIsim   FROM Randevu
+INNER JOIN Hasta ON Randevu.HastaID = Hasta.HastaID
+WHERE Randevu.DoktorID = @a AND Randevu.RandevuTarihi = @b;
