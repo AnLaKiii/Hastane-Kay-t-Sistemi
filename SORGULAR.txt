@@ -308,6 +308,20 @@ FROM Randevu
 WHERE DoktorID = @a AND RandevuTarihi BETWEEN @c AND @b
 GROUP BY RandevuTarihi
 HAVING COUNT(*) <4;
+DECLARE @a INT;
+DECLARE @b DATE;
+
+SELECT 
+    (SELECT COUNT(RandevuTarihi) 
+        FROM Randevu WHERE DoktorID = @a AND RandevuTarihi = @b 
+        GROUP BY RandevuTarihi HAVING COUNT(*) < 4) AS '3',
+    (SELECT COUNT(RandevuTarihi) 
+        FROM Randevu WHERE DoktorID = @a AND RandevuTarihi = @b
+        GROUP BY RandevuTarihi HAVING COUNT(*) > 7) AS '7',
+	(SELECT COUNT(RandevuTarihi) 
+    FROM Randevu WHERE DoktorID = @a AND RandevuTarihi = @b 
+    GROUP BY RandevuTarihi HAVING COUNT(*) >=4 AND COUNT(*) <=7 ) AS '4567';
+
 
 REÇETENİN ÇEKİLME HALİ 
 
