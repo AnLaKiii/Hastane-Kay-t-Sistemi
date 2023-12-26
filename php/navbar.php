@@ -5,6 +5,7 @@
     $conn->close();
     ?>
 <nav class="">
+
     <ul class="nav-list container-xxl">
         <a class="logo" href="./" >
             <img src="img/logo.png" alt="">

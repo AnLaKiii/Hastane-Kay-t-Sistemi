@@ -40,11 +40,9 @@
 #userMainPage{
     overflow-x: hidden;
     width: 100%;
-    padding-top: 4.5rem;
 }
 
 nav{
-   position: fixed;
    top: 0;
    z-index: 100;
    width: 100%;
@@ -460,3 +458,85 @@ footer{
         width: 100%;
     }
 }
+
+
+/************************************/
+/****************Calendar************/
+/************************************/
+ .calendar {
+	 display: flex;
+	 flex-flow: column;
+	 align-items: center;
+   width: 100%;
+}
+.calendar h1 {
+    width: 12rem;
+	font-weight: 700;
+	margin: 1rem 0 0;
+}
+.calendar #month {
+    text-align: end;
+}
+.calendar ul {
+     padding: 0;
+	 display: grid;
+     grid-template-columns: auto auto auto auto auto auto auto;
+	 flex-wrap: wrap;
+	 list-style: none;
+}
+.calendar ul li:hover{
+	 display: flex;
+	 width: 9rem;
+	 height: 9rem;
+     padding: 0rem;
+     margin: auto;
+     cursor: pointer;
+}
+.calendar ul li {
+    display: flex;
+    width: 10rem;
+    height: 10rem;
+    margin: 0.25rem;
+    flex-flow: column;
+    border-radius: 0.2rem;
+    padding: 1rem;
+    font-weight: 300;
+    font-size: 0.8rem;
+    box-sizing: border-box;
+    background: rgb(255, 255, 255);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+.calendar ul li p {
+    font-weight: 400;
+    width: 100%;
+    text-align: center;
+    font-size: 0.8rem;
+	margin: 0 0 1rem 0;
+}
+.calendar ul li time {
+    font-size: 2rem;
+    margin: 0 0 1rem 1rem;
+    font-weight: 500;
+}
+.calendar ul .today {
+	 background: #167585;
+     color: #fff;
+}
+.calendar ul .past {
+    background: #fa838d;
+    color: #fff;
+}
+.calendar ul .today time {
+	 font-weight: 800;
+}
+ 
+.calendar i{
+    font-size: 1.5rem;
+    font-weight: 600;
+    cursor: pointer;
+    color: #167585;
+}
+
