@@ -292,16 +292,35 @@ BİR GÜNDE DOKTORA KAÇ HASTA GELECEK
 
 DECLARE @a INT;
 DECLARE @b DATE;
+DECLARE @c DATE;
 
-SELECT DoktorID, COUNT(*) AS Randevu_Sayisi
+SELECT RandevuTarihi, COUNT(*) AS Randevu_Sayisi
 FROM Randevu
-WHERE DoktorID = @a AND RandevuTarihi = @b
-GROUP BY DoktorID;
+WHERE DoktorID = @a AND RandevuTarihi BETWEEN @c AND @b
+GROUP BY RandevuTarihi;
 
-REÇETENİN ÇEKİLME Halİ 
+REÇETENİN ÇEKİLME HALİ 
+
 DECLARE @a INT;
+
 SELECT Recete.ReceteID, Ilac.IlacID, Ilac.IlacAdi
 FROM Recete_Ilac
 INNER JOIN Recete ON Recete.ReceteID = Recete_Ilac.ReceteID
 INNER JOIN Ilac ON Ilac.IlacID = Recete_Ilac.IlacID
 WHERE Recete_Ilac.ReceteID = @a;
+
+RECETİNİN YAZILMASI
+
+DECLARE @a INT;
+DECLARE @b INT;
+INSERT INTO Recete_Ilac (ReceteID, IlacID) VALUES (@a, @b);
+
+
+RECETİNİN OLUŞTURULMASI
+
+DECLARE @a VARCHAR;
+
+INSERT INTO Recete (ReceteAdi ) VALUES (@a);
+
+
+
