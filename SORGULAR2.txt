@@ -1,0 +1,79 @@
+INSERT INTO Hasta (HastaAdi, Soyadi, TCKimlikNo, HastaTelefonNo, HastaEmail, DogumTarihi) VALUES ('@a', '@b', @c, '@d', '@e', '@f');
+INSERT INTO Sifre(TCKimlikNo,Sifre) VALUES (@c,'@g');
+SELECT TCKimlikNo FROM Hasta WHERE TCKimlikNo = @c;
+SELECT HastaID FROM Hasta WHERE TCKimlikNo = @c;
+INSERT INTO Adres (HastaID,Sehir,Ilce,AcikAdres) VALUES (".@row["HastaID"].",'@h','@i','@j');
+SELECT * FROM Sifre WHERE TCKimlikNo = @a;
+
+SELECT DoktorID, CONCAT(DoktorAdi, ' ', DoktorSoyadi) AS DoktorIsim FROM Doktor
+        INNER JOIN BolumAdi ON Doktor.DoktorBolumID = BolumAdi.BolumID 
+        WHERE BolumID = @bolum;
+
+SELECT  TIME_FORMAT(RandevuSaati, '%H:%i') AS RandevuSaati FROM Randevu WHERE DoktorID = @doktorID AND RandevuTarihi = '@date' ORDER BY RandevuSaati;
+
+INSERT INTO Randevu (RandevuTarihi,RandevuSaati,HastaID,DoktorID) VALUES ('@date','@time',@hastaID,@doktorID);
+SELECT * FROM Sifre WHERE TCKimlikNo = (SELECT TCKimlikNo FROM Hasta WHERE HastaID = @hastaID);
+
+UPDATE Sifre SET Sifre ='@b' WHERE TCKimlikNo = @c
+
+SELECT 
+Randevu.RandevuID,
+Randevu.RandevuTarihi,
+SUBSTRING(Randevu.RandevuSaati, 1, 5) AS RandevuSaati,
+CONCAT( Doktor.DoktorAdi, ' ' ,Doktor.DoktorSoyadi) AS DoktorAdiSoyadi, 
+BolumAdi.BolumAdi
+FROM Randevu
+INNER JOIN Doktor ON Randevu.DoktorID = Doktor.DoktorID 
+INNER JOIN BolumAdi ON Doktor.DoktorBolumID = BolumAdi.BolumID WHERE HastaID = @hastaID ORDER BY CONCAT(RandevuTarihi, ' ', RandevuSaati) ASC;
+DELETE FROM Randevu WHERE RandevuID = @a;
+SELECT HastaTelefonNo FROM Hasta WHERE HastaTelefonNo = '@a'
+UPDATE Hasta SET  HastaTelefonNo = '@a'  WHERE HastaID = @b;
+UPDATE Hasta SET  HastaEmail = '@a'  WHERE HastaID = @b;
+UPDATE Adres SET Sehir ='@a', Ilce = '@b', AcikAdres = '@c'  WHERE HastaID = @d";
+
+
+SELECT 
+            Randevu.RandevuID,
+            Randevu.RandevuTarihi,
+            CONCAT( Hasta.HastaAdi, ' ' ,Hasta.Soyadi) AS HastaAdiSoyadi,
+            SUBSTRING(Randevu.RandevuSaati, 1, 5) AS RandevuSaati,
+            CONCAT( Doktor.DoktorAdi, ' ' ,Doktor.DoktorSoyadi) AS DoktorAdiSoyadi, 
+            BolumAdi.BolumAdi
+            FROM Randevu
+            INNER JOIN Doktor ON Randevu.DoktorID = Doktor.DoktorID 
+            INNER JOIN Hasta ON Randevu.HastaID = Hasta.HastaID 
+            INNER JOIN BolumAdi ON Doktor.DoktorBolumID = BolumAdi.BolumID 
+            WHERE Randevu.RandevuID = @a;
+
+SELECT * FROM Recete WHERE RandevuID = @a;
+
+SELECT CONCAT(HastaAdi,' ',Soyadi) AS HastaAdi FROM Hasta WHERE  HastaID= @a;
+
+
+SELECT Recete.ReceteID, Ilac.IlacID, Ilac.IlacAdi
+    FROM Recete_Ilac
+    INNER JOIN Recete ON Recete.ReceteID = Recete_Ilac.ReceteID
+    INNER JOIN Ilac ON Ilac.IlacID = Recete_Ilac.IlacID
+    WHERE Recete_Ilac.ReceteID = @a;
+
+SELECT * FROM DSifre WHERE DTCKimlikNo = @a;
+SELECT DoktorID FROM Doktor WHERE DTCKimlikNo = @a;
+SELECT DAY(RandevuTarihi) AS gun, COUNT(*) AS Randevu_Sayisi
+                FROM Randevu
+                WHERE DoktorID = @doc AND YEAR(RandevuTarihi) = YEAR('@date') AND MONTH(RandevuTarihi) = MONTH('@date')
+                GROUP BY RandevuTarihi;
+
+SELECT * FROM HastaBilgileri
+            WHERE DoktorID = @doc AND RandevuTarihi = '@date' 
+            ORDER BY RandevuSaati ASC;
+
+SELECT * FROM Ilac;
+SELECT ReceteID FROM Recete WHERE RandevuID = @randevuID;
+INSERT INTO Recete (RandevuID,ReceteAdi) VALUES (@randevuID,'@receteAdi');
+SELECT ReceteID FROM Recete WHERE RandevuID = @randevuID;
+SELECT IlacAdi FROM Ilac WHERE IlacID = @ilacID;
+INSERT INTO Recete_Ilac (ReceteID,IlacID) VALUES (@receteID,@ilacID);
+SELECT ReceteID FROM Recete WHERE RandevuID = @randevuID;
+DELETE FROM Recete_Ilac WHERE ReceteID = @receteID AND IlacID = @ilacID;
+
+SELECT CONCAT(DoktorAdi,' ',DoktorSoyadi) AS DoktorAdi FROM Doktor WHERE  DoktorID= ".@_SESSION["doktor"]

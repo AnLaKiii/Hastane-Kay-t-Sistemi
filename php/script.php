@@ -191,8 +191,8 @@ if($getVal == "randevular"){
             CONCAT( Doktor.DoktorAdi, ' ' ,Doktor.DoktorSoyadi) AS DoktorAdiSoyadi, 
             BolumAdi.BolumAdi
             FROM Randevu
-            LEFT JOIN Doktor ON Randevu.DoktorID = Doktor.DoktorID 
-            LEFT JOIN BolumAdi ON Doktor.DoktorBolumID = BolumAdi.BolumID WHERE HastaID = $hastaID ORDER BY CONCAT(RandevuTarihi, ' ', RandevuSaati) ASC";
+            INNER JOIN Doktor ON Randevu.DoktorID = Doktor.DoktorID 
+            INNER JOIN BolumAdi ON Doktor.DoktorBolumID = BolumAdi.BolumID WHERE HastaID = $hastaID ORDER BY CONCAT(RandevuTarihi, ' ', RandevuSaati) ASC";
     $result = $conn->query($SQL);
     $i = 0;
     if ($result->num_rows > 0) {
